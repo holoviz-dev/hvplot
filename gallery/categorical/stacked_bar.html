@@ -1,0 +1,2781 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" data-theme="light">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Stacked Bar Chart &#8212; hvPlot 0.11.3 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/nbsite.css?v=d9d93254" />
+    <link rel="stylesheet" type="text/css" href="../../_static/notebook.css?v=19946987" />
+    <link rel="stylesheet" type="text/css" href="../../_static/gallery.css?v=0a3248cd" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alert.css?v=c26666be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/dataframe.css?v=a0f274c1" />
+    <link rel="stylesheet" type="text/css" href="../../_static/scroller.css?v=2dcde208" />
+    <link rel="stylesheet" type="text/css" href="../../_static/hv-sidebar-dropdown.css?v=3e2b0152" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=bab6b1ab" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=2088e4e3"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>
+    window.goatcounter = {
+        path: function(p) { return location.host + p }
+    }
+</script>
+    <script async="async" data-goatcounter="https://holoviz.goatcounter.com/count" src="../../_static/js/goatcounter.js?v=f53f84b8"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'gallery/categorical/stacked_bar';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="canonical" href="https://hvplot.holoviz.org/en/docs/latest/gallery/categorical/stacked_bar.html" />
+    <link rel="icon" href="../../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Category Heatmap" href="category_heatmap.html" />
+    <link rel="prev" title="Horizontal Bar Chart" href="horizontal_bar.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.11.3" />
+    <meta name="docbuild:last-update" content="2025-07-16"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="light">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+    
+    <img src="../../_static/logo_horizontal.svg" class="logo__image only-light" alt="hvPlot 0.11.3 documentation - Home"/>
+    <img src="../../_static/logo_horizontal.svg" class="logo__image only-dark pst-js-only" alt="hvPlot 0.11.3 documentation - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../tutorials/index.html">
+    Tutorials
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../user_guide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../reference/index.html">
+    Reference Gallery
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    Gallery
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../ref/index.html">
+    Reference
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../developer_guide.html">
+    Developer Guide
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../releases.html">
+    Releases
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../roadmap.html">
+    Roadmap
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../about.html">
+    About
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/holoviz/hvplot" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/HoloViews" title="Twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter-square fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://discourse.holoviz.org/c/hvplot" title="Discourse" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discourse fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Discourse</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://discord.gg/AXRHnJU6sP" title="Discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Discord</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../tutorials/index.html">
+    Tutorials
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../user_guide/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../reference/index.html">
+    Reference Gallery
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    Gallery
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../ref/index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../developer_guide.html">
+    Developer Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../releases.html">
+    Releases
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../roadmap.html">
+    Roadmap
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../about.html">
+    About
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/holoviz/hvplot" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/HoloViews" title="Twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter-square fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://discourse.holoviz.org/c/hvplot" title="Discourse" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discourse fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Discourse</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://discord.gg/AXRHnJU6sP" title="Discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Discord</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><!-- Adapted from sidebar-nav-bs.html (1.15.2) with the following changes
+
+  - Commented out the tag that adds the "Section Navigation" title
+  - Call generate_toctree_html with startdepth=0
+
+Please update this file when required when bumping the max pin of pydata-sphinx-theme.
+-->
+
+
+<nav class="bd-docs-nav bd-links"
+      aria-label="Section Navigation">
+  <!-- <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p> -->
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../tutorials/index.html">Tutorials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/getting_started.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/getting_started_pandas.html">Using hvPlot as a Pandas user</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://holoviz.org/tutorial/index.html">HoloViz Tutorial</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../user_guide/index.html">User Guide</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../user_guide/Introduction.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../user_guide/Plotting.html">Plotting with Bokeh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../user_guide/Plotting_with_Matplotlib.html">Plotting with Matplotlib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../user_guide/Plotting_with_Plotly.html">Plotting with Plotly</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../user_guide/Interactive.html">Interactive</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../user_guide/Widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../user_guide/Plotting_Extensions.html">Plotting Extensions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../user_guide/Explorer.html">Exploring data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../user_guide/Viewing.html">Viewing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../user_guide/Subplots.html">Subplots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../user_guide/Streaming.html">Streaming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../user_guide/Gridded_Data.html">Gridded Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../user_guide/NetworkX.html">Network Graphs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../user_guide/Geographic_Data.html">Geographic Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../user_guide/Timeseries_Data.html">Timeseries Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../user_guide/Large_Timeseries.html">Large Timeseries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../user_guide/Statistical_Plots.html">Statistical Plots</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../reference/index.html">Reference Gallery</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../reference/tabular/index.html">Tabular</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/tabular/andrewscurves.html">Andrewscurves</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/tabular/area.html">Area</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/tabular/bar.html">Bar</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/tabular/barh.html">Barh</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/tabular/bivariate.html">Bivariate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/tabular/box.html">Box</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/tabular/errorbars.html">Errorbars</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/tabular/heatmap.html">Heatmap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/tabular/hexbin.html">Hexbin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/tabular/hist.html">Hist</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/tabular/kde.html">Kde</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/tabular/labels.html">Labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/tabular/lagplot.html">Lagplot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/tabular/line.html">Line</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/tabular/ohlc.html">Ohlc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/tabular/parallelcoordinates.html">Parallelcoordinates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/tabular/paths.html">Paths</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/tabular/scatter.html">Scatter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/tabular/scattermatrix.html">Scattermatrix</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/tabular/step.html">Step</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/tabular/table.html">Table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/tabular/violin.html">Violin</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../reference/geopandas/index.html">Geopandas</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/geopandas/points.html">Points</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/geopandas/polygons.html">Polygons</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../reference/xarray/index.html">Xarray</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/xarray/bar.html">Bar</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/xarray/contour.html">Contour</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/xarray/contourf.html">Contourf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/xarray/hist.html">Hist</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/xarray/image.html">Image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/xarray/kde.html">Kde</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/xarray/line.html">Line</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/xarray/quadmesh.html">Quadmesh</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/xarray/rgb.html">Rgb</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/xarray/vectorfield.html">Vectorfield</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/xarray/violin.html">Violin</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../index.html">Gallery</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 has-children"><a class="reference internal" href="../basic-charts/index.html">Basic Charts</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../basic-charts/simple_line.html">Line Plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../basic-charts/simple_bar.html">Bar Chart</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../basic-charts/simple_scatter.html">Scatter Plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../basic-charts/simple_area.html">Area Chart</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../basic-charts/simple_boxplot.html">Box Plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../basic-charts/basic_heatmap.html">Heatmap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../basic-charts/simple_step.html">Step Chart</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../time-series/index.html">Time Series</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../time-series/time_series_line.html">Line</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../time-series/time_series_bar.html">Bar</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../time-series/area_time_series.html">Area</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../time-series/multi_series_line.html">Multi Line</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../time-series/dual_axis_timeseries.html">Dual Axis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../time-series/step_time_series.html">Step Timeseries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../time-series/forcast_bands.html">Forecast Bands</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../time-series/ohlc.html">OHLC plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../time-series/lag_plot.html">Lag Plot</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="index.html">Categorical</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="grouped_bar.html">Grouped Bars</a></li>
+<li class="toctree-l3"><a class="reference internal" href="category_bar.html">Categorical Bars</a></li>
+<li class="toctree-l3"><a class="reference internal" href="horizontal_bar.html">Horizontal Bars</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">Stacked Bars</a></li>
+<li class="toctree-l3"><a class="reference internal" href="category_heatmap.html">Heatmap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="strip_jitter.html">Jittered Strip Plot</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../statistical/index.html">Statistical</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../statistical/histogram.html">Histogram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../statistical/density_plot.html">KDE Plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../statistical/hexbin.html">Hexbin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../statistical/correlation_heatmap.html">Correlation Heatmap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../statistical/violin.html">Violin Plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../statistical/boxplot.html">Box Plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../statistical/bivariate.html">Bivariate Plot</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../geospatial/index.html">Geo-spatial</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../geospatial/geopoints.html">Geographic Scatter Plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../geospatial/map_overlay.html">Map Overlay with Tiles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../geospatial/datashade_map.html">Datashaded Earthquake Map</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../geospatial/polygon_map.html">Geographic Polygon Plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../geospatial/paths_labels.html">Paths Plot</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../multi-dimensional/index.html">Multi-Dimensional</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../multi-dimensional/scatter_multi.html">Multi-Dimensional Scatter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../multi-dimensional/xarray_image.html">Xarray Image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../multi-dimensional/groupby.html">Faceted Time Series</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../multi-dimensional/scatter_matrix.html">Scatter Matrix</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../multi-dimensional/quadmesh.html">Quadmesh Plot</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../interactivity/index.html">Interactivity</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../interactivity/groupby_widget.html">Groupby Widget</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../interactivity/penguins_app.html">Penguins App</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../interactivity/sine_curve.html">Sine Wave</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../advanced/index.html">Advanced Plots</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../advanced/stem_plot.html">Stem Plot</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../ref/index.html">Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../ref/installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ref/data_libraries.html">Supported data libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ref/plotting_extensions.html">Supported plotting extensions</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../ref/plotting_options/index.html">Plotting options</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/plotting_options/index.html">All Options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/plotting_options/data.html">Data Options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/plotting_options/styling.html">Styling Options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/plotting_options/interactivity.html">Interactivity Options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/plotting_options/grid_legend.html">Grid And Legend Options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/plotting_options/size_layout.html">Size And Layout Options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/plotting_options/resampling.html">Resampling Options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/plotting_options/geographic.html">Geographic Options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/plotting_options/streaming.html">Streaming Options</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../ref/api/index.html">API</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/api/generated/hvplot.help.html">hvplot.help</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/api/generated/hvplot.hvplot_extension.html">hvplot.hvplot_extension</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/api/generated/hvplot.extension.html">hvplot.extension</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/api/generated/hvplot.output.html">hvplot.output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/api/generated/hvplot.render.html">hvplot.render</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/api/generated/hvplot.save.html">hvplot.save</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/api/generated/hvplot.show.html">hvplot.show</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/api/manual/hvplot.hvPlot.area.html">hvplot.hvPlot.area</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/api/manual/hvplot.hvPlot.bar.html">hvplot.hvPlot.bar</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/api/manual/hvplot.hvPlot.barh.html">hvplot.hvPlot.barh</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/api/manual/hvplot.hvPlot.box.html">hvplot.hvPlot.box</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/api/manual/hvplot.hvPlot.bivariate.html">hvplot.hvPlot.bivariate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/api/manual/hvplot.hvPlot.contour.html">hvplot.hvPlot.contour</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/api/manual/hvplot.hvPlot.contourf.html">hvplot.hvPlot.contourf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/api/manual/hvplot.hvPlot.dataset.html">hvplot.hvPlot.dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/api/manual/hvplot.hvPlot.density.html">hvplot.hvPlot.density</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/api/manual/hvplot.hvPlot.errorbars.html">hvplot.hvPlot.errorbars</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/api/manual/hvplot.hvPlot.heatmap.html">hvplot.hvPlot.heatmap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/api/manual/hvplot.hvPlot.hexbin.html">hvplot.hvPlot.hexbin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/api/manual/hvplot.hvPlot.hist.html">hvplot.hvPlot.hist</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/api/manual/hvplot.hvPlot.image.html">hvplot.hvPlot.image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/api/manual/hvplot.hvPlot.kde.html">hvplot.hvPlot.kde</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/api/manual/hvplot.hvPlot.labels.html">hvplot.hvPlot.labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/api/manual/hvplot.hvPlot.line.html">hvplot.hvPlot.line</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/api/manual/hvplot.hvPlot.ohlc.html">hvplot.hvPlot.ohlc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/api/manual/hvplot.hvPlot.paths.html">hvplot.hvPlot.paths</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/api/manual/hvplot.hvPlot.points.html">hvplot.hvPlot.points</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/api/manual/hvplot.hvPlot.polygons.html">hvplot.hvPlot.polygons</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/api/manual/hvplot.hvPlot.quadmesh.html">hvplot.hvPlot.quadmesh</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/api/manual/hvplot.hvPlot.rgb.html">hvplot.hvPlot.rgb</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/api/manual/hvplot.hvPlot.scatter.html">hvplot.hvPlot.scatter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/api/manual/hvplot.hvPlot.step.html">hvplot.hvPlot.step</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/api/manual/hvplot.hvPlot.table.html">hvplot.hvPlot.table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/api/manual/hvplot.hvPlot.vectorfield.html">hvplot.hvPlot.vectorfield</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/api/manual/hvplot.hvPlot.violin.html">hvplot.hvPlot.violin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/api/manual/hvplot.plotting.andrews_curves.html">hvplot.plotting.andrews_curves</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/api/manual/hvplot.plotting.lag_plot.html">hvplot.plotting.lag_plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/api/manual/hvplot.plotting.parallel_coordinates.html">hvplot.plotting.parallel_coordinates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/api/manual/hvplot.plotting.scatter_matrix.html">hvplot.plotting.scatter_matrix</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/api/generated/hvplot.networkx.draw.html">hvplot.networkx.draw</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/api/generated/hvplot.networkx.draw_networkx.html">hvplot.networkx.draw_networkx</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/api/generated/hvplot.networkx.draw_networkx_nodes.html">hvplot.networkx.draw_networkx_nodes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/api/generated/hvplot.networkx.draw_networkx_edges.html">hvplot.networkx.draw_networkx_edges</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/api/generated/hvplot.networkx.draw_networkx_labels.html">hvplot.networkx.draw_networkx_labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/api/generated/hvplot.networkx.draw_circular.html">hvplot.networkx.draw_circular</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/api/generated/hvplot.networkx.draw_kamada_kawai.html">hvplot.networkx.draw_kamada_kawai</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/api/generated/hvplot.networkx.draw_random.html">hvplot.networkx.draw_random</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/api/generated/hvplot.networkx.draw_planar.html">hvplot.networkx.draw_planar</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/api/generated/hvplot.networkx.draw_shell.html">hvplot.networkx.draw_shell</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/api/generated/hvplot.networkx.draw_spectral.html">hvplot.networkx.draw_spectral</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/api/generated/hvplot.networkx.draw_spring.html">hvplot.networkx.draw_spring</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/api/generated/hvplot.hvPlot.explorer.html">hvplot.hvPlot.explorer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/api/generated/hvplot.ui.explorer.html">hvplot.ui.explorer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/api/generated/hvplot.ui.hvPlotExplorer.html">hvplot.ui.hvPlotExplorer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/api/generated/hvplot.ui.hvPlotExplorer.hvplot.html">hvplot.ui.hvPlotExplorer.hvplot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/api/generated/hvplot.ui.hvPlotExplorer.plot_code.html">hvplot.ui.hvPlotExplorer.plot_code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/api/generated/hvplot.ui.hvPlotExplorer.save.html">hvplot.ui.hvPlotExplorer.save</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/api/generated/hvplot.ui.hvPlotExplorer.servable.html">hvplot.ui.hvPlotExplorer.servable</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/api/generated/hvplot.ui.hvPlotExplorer.settings.html">hvplot.ui.hvPlotExplorer.settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ref/api/generated/hvplot.ui.hvPlotExplorer.show.html">hvplot.ui.hvPlotExplorer.show</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../ref/api_compatibility/index.html">API compatibility</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../ref/api_compatibility/pandas/index.html">Pandas</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../ref/api_compatibility/pandas/Pandas_API.html">Comparison with Pandas API</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ref/deprecations.html">Deprecations/Removals</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developer_guide.html">Developer Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../releases.html">Releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../roadmap.html">Roadmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">About</a></li>
+</ul>
+</div>
+</nav></div>
+        <div class="sidebar-primary-item">
+<div class="hv-sb-dd">
+  <div class="btn-group">
+    
+    <a href="https://holoviz.org" class="btn hv-sb-dd-value" target="_blank">HoloViz.org<i class="fa fa-external-link hv-icon" aria-hidden="true"></i></a>
+    
+    <button type="button" class="btn dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+      <span class="visually-hidden"></span>
+    </button>
+    <ul class="dropdown-menu">
+      
+      
+        <li><a class="dropdown-item" href="https://param.holoviz.org" target="_blank" title="Assembling objects from many different libraries into a layout or app, whether in a Jupyter notebook or in a standalone servable dashboard">Panel<i class="fa fa-external-link hv-icon" aria-hidden="true"></i></a></li>
+      
+      
+      
+      
+      
+        <li><a class="dropdown-item" href="https://holoviews.org" target="_blank" title="Declarative objects for instantly visualizable data, building Bokeh plots from convenient high-level specifications">HoloViews<i class="fa fa-external-link hv-icon" aria-hidden="true"></i></a></li>
+      
+      
+      
+        <li><a class="dropdown-item" href="https://geoviews.org" target="_blank" title="Visualizable geographic data that that can be mixed and matched with HoloViews objects">GeoViews<i class="fa fa-external-link hv-icon" aria-hidden="true"></i></a></li>
+      
+      
+      
+        <li><a class="dropdown-item" href="https://datashader.org" target="_blank" title="Rasterizing huge datasets quickly as fixed-size images">Datashader<i class="fa fa-external-link hv-icon" aria-hidden="true"></i></a></li>
+      
+      
+      
+        <li><a class="dropdown-item" href="https://param.holoviz.org" target="_blank" title="Make your Python code clearer and more reliable by declaring Parameters">Param<i class="fa fa-external-link hv-icon" aria-hidden="true"></i></a></li>
+      
+      
+      
+        <li><a class="dropdown-item" href="https://lumen.holoviz.org" target="_blank" title="Framework for visual analytics that allows users to build data-driven dashboards from a simple YAML specification">Lumen<i class="fa fa-external-link hv-icon" aria-hidden="true"></i></a></li>
+      
+      
+      
+        <li><a class="dropdown-item" href="https://colorcet.holoviz.org" target="_blank" title="A wide range of perceptually uniform continuous colormaps and perceptually based categorical color sets for use with the other libraries">Colorcet<i class="fa fa-external-link hv-icon" aria-hidden="true"></i></a></li>
+      
+      
+      
+      <li><hr class="dropdown-divider"></li>
+      
+      
+      <li><a class="dropdown-item" href="https://examples.holoviz.org" target="_blank" title=" Visualization-focused examples using HoloViz for specific topics ">Examples Gallery<i class="fa fa-external-link hv-icon" aria-hidden="true"></i></a></li>
+      
+      
+      
+      <li><a class="dropdown-item" href="https://blog.holoviz.org" target="_blank" title="HoloViz blog">Blog<i class="fa fa-external-link hv-icon" aria-hidden="true"></i></a></li>
+      
+      
+      
+    </ul>
+  </div>
+</div>
+</div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Gallery</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Categorical</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Stacked Bar Chart</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="stacked-bar-chart">
+<h1>Stacked Bar Chart<a class="headerlink" href="#stacked-bar-chart" title="Link to this heading">#</a></h1>
+<p>A stacked bar chart showing the total count of penguins per species and how they break down by sex.<br />
+This example uses the <code class="docutils literal notranslate"><span class="pre">penguins</span></code> dataset from <code class="docutils literal notranslate"><span class="pre">hvsampledata</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">hvplot.pandas</span>  <span class="c1"># noqa</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">hvsampledata</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">hvsampledata</span><span class="o">.</span><span class="n">penguins</span><span class="p">(</span><span class="s1">&#39;pandas&#39;</span><span class="p">)</span>
+<span class="n">grouped</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;species&#39;</span><span class="p">,</span> <span class="s1">&#39;sex&#39;</span><span class="p">],</span> <span class="n">observed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;count&#39;</span><span class="p">)</span>
+
+<span class="n">grouped</span><span class="o">.</span><span class="n">hvplot</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="s1">&#39;species&#39;</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="s1">&#39;count&#39;</span><span class="p">,</span>
+    <span class="n">by</span><span class="o">=</span><span class="s1">&#39;sex&#39;</span><span class="p">,</span>
+    <span class="n">stacked</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Stacked Bar Chart (Bokeh)&#39;</span><span class="p">,</span>
+    <span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Species&#39;</span><span class="p">,</span>
+    <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Count&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><script type="esms-options">{"shimMode": true}</script><style>*[data-root-id],
+*[data-root-id] > * {
+  box-sizing: border-box;
+  font-family: var(--jp-ui-font-family);
+  font-size: var(--jp-ui-font-size1);
+  color: var(--vscode-editor-foreground, var(--jp-ui-font-color1));
+}
+
+/* Override VSCode background color */
+.cell-output-ipywidget-background:has(
+  > .cell-output-ipywidget-background > .lm-Widget > *[data-root-id]
+),
+.cell-output-ipywidget-background:has(> .lm-Widget > *[data-root-id]) {
+  background-color: transparent !important;
+}
+</style></div><script type="application/javascript">(function(root) {
+  function now() {
+    return new Date();
+  }
+
+  const force = true;
+  const py_version = '3.7.3'.replace('rc', '-rc.').replace('.dev', '-dev.');
+  const reloading = false;
+  const Bokeh = root.Bokeh;
+
+  // Set a timeout for this load but only if we are not already initializing
+  if (typeof (root._bokeh_timeout) === "undefined" || (force || !root._bokeh_is_initializing)) {
+    root._bokeh_timeout = Date.now() + 5000;
+    root._bokeh_failed_load = false;
+  }
+
+  function run_callbacks() {
+    try {
+      root._bokeh_onload_callbacks.forEach(function(callback) {
+        if (callback != null)
+          callback();
+      });
+    } finally {
+      delete root._bokeh_onload_callbacks;
+    }
+    console.debug("Bokeh: all callbacks have finished");
+  }
+
+  function load_libs(css_urls, js_urls, js_modules, js_exports, callback) {
+    if (css_urls == null) css_urls = [];
+    if (js_urls == null) js_urls = [];
+    if (js_modules == null) js_modules = [];
+    if (js_exports == null) js_exports = {};
+
+    root._bokeh_onload_callbacks.push(callback);
+
+    if (root._bokeh_is_loading > 0) {
+      // Don't load bokeh if it is still initializing
+      console.debug("Bokeh: BokehJS is being loaded, scheduling callback at", now());
+      return null;
+    } else if (js_urls.length === 0 && js_modules.length === 0 && Object.keys(js_exports).length === 0) {
+      // There is nothing to load
+      run_callbacks();
+      return null;
+    }
+
+    function on_load() {
+      root._bokeh_is_loading--;
+      if (root._bokeh_is_loading === 0) {
+        console.debug("Bokeh: all BokehJS libraries/stylesheets loaded");
+        run_callbacks()
+      }
+    }
+    window._bokeh_on_load = on_load
+
+    function on_error(e) {
+      const src_el = e.srcElement
+      console.error("failed to load " + (src_el.href || src_el.src));
+    }
+
+    const skip = [];
+    if (window.requirejs) {
+      window.requirejs.config({'packages': {}, 'paths': {}, 'shim': {}});
+      root._bokeh_is_loading = css_urls.length + 0;
+    } else {
+      root._bokeh_is_loading = css_urls.length + js_urls.length + js_modules.length + Object.keys(js_exports).length;
+    }
+
+    const existing_stylesheets = []
+    const links = document.getElementsByTagName('link')
+    for (let i = 0; i < links.length; i++) {
+      const link = links[i]
+      if (link.href != null) {
+        existing_stylesheets.push(link.href)
+      }
+    }
+    for (let i = 0; i < css_urls.length; i++) {
+      const url = css_urls[i];
+      const escaped = encodeURI(url)
+      if (existing_stylesheets.indexOf(escaped) !== -1) {
+        on_load()
+        continue;
+      }
+      const element = document.createElement("link");
+      element.onload = on_load;
+      element.onerror = on_error;
+      element.rel = "stylesheet";
+      element.type = "text/css";
+      element.href = url;
+      console.debug("Bokeh: injecting link tag for BokehJS stylesheet: ", url);
+      document.body.appendChild(element);
+    }    var existing_scripts = []
+    const scripts = document.getElementsByTagName('script')
+    for (let i = 0; i < scripts.length; i++) {
+      var script = scripts[i]
+      if (script.src != null) {
+        existing_scripts.push(script.src)
+      }
+    }
+    for (let i = 0; i < js_urls.length; i++) {
+      const url = js_urls[i];
+      const escaped = encodeURI(url)
+      if (skip.indexOf(escaped) !== -1 || existing_scripts.indexOf(escaped) !== -1) {
+        if (!window.requirejs) {
+          on_load();
+        }
+        continue;
+      }
+      const element = document.createElement('script');
+      element.onload = on_load;
+      element.onerror = on_error;
+      element.async = false;
+      element.src = url;
+      console.debug("Bokeh: injecting script tag for BokehJS library: ", url);
+      document.head.appendChild(element);
+    }
+    for (let i = 0; i < js_modules.length; i++) {
+      const url = js_modules[i];
+      const escaped = encodeURI(url)
+      if (skip.indexOf(escaped) !== -1 || existing_scripts.indexOf(escaped) !== -1) {
+        if (!window.requirejs) {
+          on_load();
+        }
+        continue;
+      }
+      var element = document.createElement('script');
+      element.onload = on_load;
+      element.onerror = on_error;
+      element.async = false;
+      element.src = url;
+      element.type = "module";
+      console.debug("Bokeh: injecting script tag for BokehJS library: ", url);
+      document.head.appendChild(element);
+    }
+    for (const name in js_exports) {
+      const url = js_exports[name];
+      const escaped = encodeURI(url)
+      if (skip.indexOf(escaped) >= 0 || root[name] != null) {
+        if (!window.requirejs) {
+          on_load();
+        }
+        continue;
+      }
+      var element = document.createElement('script');
+      element.onerror = on_error;
+      element.async = false;
+      element.type = "module";
+      console.debug("Bokeh: injecting script tag for BokehJS library: ", url);
+      element.textContent = `
+      import ${name} from "${url}"
+      window.${name} = ${name}
+      window._bokeh_on_load()
+      `
+      document.head.appendChild(element);
+    }
+    if (!js_urls.length && !js_modules.length) {
+      on_load()
+    }
+  };
+
+  function inject_raw_css(css) {
+    const element = document.createElement("style");
+    element.appendChild(document.createTextNode(css));
+    document.body.appendChild(element);
+  }
+
+  const js_urls = ["https://cdn.holoviz.org/panel/1.7.4/dist/bundled/reactiveesm/es-module-shims@^1.10.0/dist/es-module-shims.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-3.7.3.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-gl-3.7.3.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-widgets-3.7.3.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-tables-3.7.3.min.js", "https://cdn.holoviz.org/panel/1.7.4/dist/panel.min.js"];
+  const js_modules = [];
+  const js_exports = {};
+  const css_urls = [];
+  const inline_js = [    function(Bokeh) {
+      Bokeh.set_log_level("info");
+    },
+function(Bokeh) {} // ensure no trailing comma for IE
+  ];
+
+  function run_inline_js() {
+    if ((root.Bokeh !== undefined) || (force === true)) {
+      for (let i = 0; i < inline_js.length; i++) {
+        try {
+          inline_js[i].call(root, root.Bokeh);
+        } catch(e) {
+          if (!reloading) {
+            throw e;
+          }
+        }
+      }
+      // Cache old bokeh versions
+      if (Bokeh != undefined && !reloading) {
+        var NewBokeh = root.Bokeh;
+        if (Bokeh.versions === undefined) {
+          Bokeh.versions = new Map();
+        }
+        if (NewBokeh.version !== Bokeh.version) {
+          Bokeh.versions.set(NewBokeh.version, NewBokeh)
+        }
+        root.Bokeh = Bokeh;
+      }
+    } else if (Date.now() < root._bokeh_timeout) {
+      setTimeout(run_inline_js, 100);
+    } else if (!root._bokeh_failed_load) {
+      console.log("Bokeh: BokehJS failed to load within specified timeout.");
+      root._bokeh_failed_load = true;
+    }
+    root._bokeh_is_initializing = false
+  }
+
+  function load_or_wait() {
+    // Implement a backoff loop that tries to ensure we do not load multiple
+    // versions of Bokeh and its dependencies at the same time.
+    // In recent versions we use the root._bokeh_is_initializing flag
+    // to determine whether there is an ongoing attempt to initialize
+    // bokeh, however for backward compatibility we also try to ensure
+    // that we do not start loading a newer (Panel>=1.0 and Bokeh>3) version
+    // before older versions are fully initialized.
+    if (root._bokeh_is_initializing && Date.now() > root._bokeh_timeout) {
+      // If the timeout and bokeh was not successfully loaded we reset
+      // everything and try loading again
+      root._bokeh_timeout = Date.now() + 5000;
+      root._bokeh_is_initializing = false;
+      root._bokeh_onload_callbacks = undefined;
+      root._bokeh_is_loading = 0
+      console.log("Bokeh: BokehJS was loaded multiple times but one version failed to initialize.");
+      load_or_wait();
+    } else if (root._bokeh_is_initializing || (typeof root._bokeh_is_initializing === "undefined" && root._bokeh_onload_callbacks !== undefined)) {
+      setTimeout(load_or_wait, 100);
+    } else {
+      root._bokeh_is_initializing = true
+      root._bokeh_onload_callbacks = []
+      const bokeh_loaded = root.Bokeh != null && (root.Bokeh.version === py_version || (root.Bokeh.versions !== undefined && root.Bokeh.versions.has(py_version)));
+      if (!reloading && !bokeh_loaded) {
+        if (root.Bokeh) {
+          root.Bokeh = undefined;
+        }
+        console.debug("Bokeh: BokehJS not loaded, scheduling load and callback at", now());
+      }
+      load_libs(css_urls, js_urls, js_modules, js_exports, function() {
+        console.debug("Bokeh: BokehJS plotting callback run at", now());
+        run_inline_js();
+      });
+    }
+  }
+  // Give older versions of the autoload script a head-start to ensure
+  // they initialize before we start loading newer version.
+  setTimeout(load_or_wait, 100)
+}(window));</script><script type="application/javascript">
+if ((window.PyViz === undefined) || (window.PyViz instanceof HTMLElement)) {
+  window.PyViz = {comms: {}, comm_status:{}, kernels:{}, receivers: {}, plot_index: []}
+}
+
+
+    function JupyterCommManager() {
+    }
+
+    JupyterCommManager.prototype.register_target = function(plot_id, comm_id, msg_handler) {
+      if (window.comm_manager || ((window.Jupyter !== undefined) && (Jupyter.notebook.kernel != null))) {
+        var comm_manager = window.comm_manager || Jupyter.notebook.kernel.comm_manager;
+        comm_manager.register_target(comm_id, function(comm) {
+          comm.on_msg(msg_handler);
+        });
+      } else if ((plot_id in window.PyViz.kernels) && (window.PyViz.kernels[plot_id])) {
+        window.PyViz.kernels[plot_id].registerCommTarget(comm_id, function(comm) {
+          comm.onMsg = msg_handler;
+        });
+      } else if (typeof google != 'undefined' && google.colab.kernel != null) {
+        google.colab.kernel.comms.registerTarget(comm_id, (comm) => {
+          var messages = comm.messages[Symbol.asyncIterator]();
+          function processIteratorResult(result) {
+            var message = result.value;
+            var content = {data: message.data, comm_id};
+            var buffers = []
+            for (var buffer of message.buffers || []) {
+              buffers.push(new DataView(buffer))
+            }
+            var metadata = message.metadata || {};
+            var msg = {content, buffers, metadata}
+            msg_handler(msg);
+            return messages.next().then(processIteratorResult);
+          }
+          return messages.next().then(processIteratorResult);
+        })
+      }
+    }
+
+    JupyterCommManager.prototype.get_client_comm = function(plot_id, comm_id, msg_handler) {
+      if (comm_id in window.PyViz.comms) {
+        return window.PyViz.comms[comm_id];
+      } else if (window.comm_manager || ((window.Jupyter !== undefined) && (Jupyter.notebook.kernel != null))) {
+        var comm_manager = window.comm_manager || Jupyter.notebook.kernel.comm_manager;
+        var comm = comm_manager.new_comm(comm_id, {}, {}, {}, comm_id);
+        if (msg_handler) {
+          comm.on_msg(msg_handler);
+        }
+      } else if ((plot_id in window.PyViz.kernels) && (window.PyViz.kernels[plot_id])) {
+        var comm = window.PyViz.kernels[plot_id].connectToComm(comm_id);
+        let retries = 0;
+        const open = () => {
+          if (comm.active) {
+            comm.open();
+          } else if (retries > 3) {
+            console.warn('Comm target never activated')
+          } else {
+            retries += 1
+            setTimeout(open, 500)
+          }
+        }
+        if (comm.active) {
+          comm.open();
+        } else {
+          setTimeout(open, 500)
+        }
+        if (msg_handler) {
+          comm.onMsg = msg_handler;
+        }
+      } else if (typeof google != 'undefined' && google.colab.kernel != null) {
+        var comm_promise = google.colab.kernel.comms.open(comm_id)
+        comm_promise.then((comm) => {
+          window.PyViz.comms[comm_id] = comm;
+          if (msg_handler) {
+            var messages = comm.messages[Symbol.asyncIterator]();
+            function processIteratorResult(result) {
+              var message = result.value;
+              var content = {data: message.data};
+              var metadata = message.metadata || {comm_id};
+              var msg = {content, metadata}
+              msg_handler(msg);
+              return messages.next().then(processIteratorResult);
+            }
+            return messages.next().then(processIteratorResult);
+          }
+        })
+        var sendClosure = (data, metadata, buffers, disposeOnDone) => {
+          return comm_promise.then((comm) => {
+            comm.send(data, metadata, buffers, disposeOnDone);
+          });
+        };
+        var comm = {
+          send: sendClosure
+        };
+      }
+      window.PyViz.comms[comm_id] = comm;
+      return comm;
+    }
+    window.PyViz.comm_manager = new JupyterCommManager();
+    
+
+
+var JS_MIME_TYPE = 'application/javascript';
+var HTML_MIME_TYPE = 'text/html';
+var EXEC_MIME_TYPE = 'application/vnd.holoviews_exec.v0+json';
+var CLASS_NAME = 'output';
+
+/**
+ * Render data to the DOM node
+ */
+function render(props, node) {
+  var div = document.createElement("div");
+  var script = document.createElement("script");
+  node.appendChild(div);
+  node.appendChild(script);
+}
+
+/**
+ * Handle when a new output is added
+ */
+function handle_add_output(event, handle) {
+  var output_area = handle.output_area;
+  var output = handle.output;
+  if ((output.data == undefined) || (!output.data.hasOwnProperty(EXEC_MIME_TYPE))) {
+    return
+  }
+  var id = output.metadata[EXEC_MIME_TYPE]["id"];
+  var toinsert = output_area.element.find("." + CLASS_NAME.split(' ')[0]);
+  if (id !== undefined) {
+    var nchildren = toinsert.length;
+    var html_node = toinsert[nchildren-1].children[0];
+    html_node.innerHTML = output.data[HTML_MIME_TYPE];
+    var scripts = [];
+    var nodelist = html_node.querySelectorAll("script");
+    for (var i in nodelist) {
+      if (nodelist.hasOwnProperty(i)) {
+        scripts.push(nodelist[i])
+      }
+    }
+
+    scripts.forEach( function (oldScript) {
+      var newScript = document.createElement("script");
+      var attrs = [];
+      var nodemap = oldScript.attributes;
+      for (var j in nodemap) {
+        if (nodemap.hasOwnProperty(j)) {
+          attrs.push(nodemap[j])
+        }
+      }
+      attrs.forEach(function(attr) { newScript.setAttribute(attr.name, attr.value) });
+      newScript.appendChild(document.createTextNode(oldScript.innerHTML));
+      oldScript.parentNode.replaceChild(newScript, oldScript);
+    });
+    if (JS_MIME_TYPE in output.data) {
+      toinsert[nchildren-1].children[1].textContent = output.data[JS_MIME_TYPE];
+    }
+    output_area._hv_plot_id = id;
+    if ((window.Bokeh !== undefined) && (id in Bokeh.index)) {
+      window.PyViz.plot_index[id] = Bokeh.index[id];
+    } else {
+      window.PyViz.plot_index[id] = null;
+    }
+  } else if (output.metadata[EXEC_MIME_TYPE]["server_id"] !== undefined) {
+    var bk_div = document.createElement("div");
+    bk_div.innerHTML = output.data[HTML_MIME_TYPE];
+    var script_attrs = bk_div.children[0].attributes;
+    for (var i = 0; i < script_attrs.length; i++) {
+      toinsert[toinsert.length - 1].childNodes[1].setAttribute(script_attrs[i].name, script_attrs[i].value);
+    }
+    // store reference to server id on output_area
+    output_area._bokeh_server_id = output.metadata[EXEC_MIME_TYPE]["server_id"];
+  }
+}
+
+/**
+ * Handle when an output is cleared or removed
+ */
+function handle_clear_output(event, handle) {
+  var id = handle.cell.output_area._hv_plot_id;
+  var server_id = handle.cell.output_area._bokeh_server_id;
+  if (((id === undefined) || !(id in PyViz.plot_index)) && (server_id !== undefined)) { return; }
+  var comm = window.PyViz.comm_manager.get_client_comm("hv-extension-comm", "hv-extension-comm", function () {});
+  if (server_id !== null) {
+    comm.send({event_type: 'server_delete', 'id': server_id});
+    return;
+  } else if (comm !== null) {
+    comm.send({event_type: 'delete', 'id': id});
+  }
+  delete PyViz.plot_index[id];
+  if ((window.Bokeh !== undefined) & (id in window.Bokeh.index)) {
+    var doc = window.Bokeh.index[id].model.document
+    doc.clear();
+    const i = window.Bokeh.documents.indexOf(doc);
+    if (i > -1) {
+      window.Bokeh.documents.splice(i, 1);
+    }
+  }
+}
+
+/**
+ * Handle kernel restart event
+ */
+function handle_kernel_cleanup(event, handle) {
+  delete PyViz.comms["hv-extension-comm"];
+  window.PyViz.plot_index = {}
+}
+
+/**
+ * Handle update_display_data messages
+ */
+function handle_update_output(event, handle) {
+  handle_clear_output(event, {cell: {output_area: handle.output_area}})
+  handle_add_output(event, handle)
+}
+
+function register_renderer(events, OutputArea) {
+  function append_mime(data, metadata, element) {
+    // create a DOM node to render to
+    var toinsert = this.create_output_subarea(
+    metadata,
+    CLASS_NAME,
+    EXEC_MIME_TYPE
+    );
+    this.keyboard_manager.register_events(toinsert);
+    // Render to node
+    var props = {data: data, metadata: metadata[EXEC_MIME_TYPE]};
+    render(props, toinsert[0]);
+    element.append(toinsert);
+    return toinsert
+  }
+
+  events.on('output_added.OutputArea', handle_add_output);
+  events.on('output_updated.OutputArea', handle_update_output);
+  events.on('clear_output.CodeCell', handle_clear_output);
+  events.on('delete.Cell', handle_clear_output);
+  events.on('kernel_ready.Kernel', handle_kernel_cleanup);
+
+  OutputArea.prototype.register_mime_type(EXEC_MIME_TYPE, append_mime, {
+    safe: true,
+    index: 0
+  });
+}
+
+if (window.Jupyter !== undefined) {
+  try {
+    var events = require('base/js/events');
+    var OutputArea = require('notebook/js/outputarea').OutputArea;
+    if (OutputArea.prototype.mime_types().indexOf(EXEC_MIME_TYPE) == -1) {
+      register_renderer(events, OutputArea);
+    }
+  } catch(err) {
+  }
+}
+</script><div class="output text_html"><div id='4e3398ff-7f9a-474d-b27a-e7d510c416cc'>
+  <div id="d1b2fee0-9964-46d6-a6e0-005c15ce175d" data-root-id="4e3398ff-7f9a-474d-b27a-e7d510c416cc" style="display: contents;"></div>
+</div>
+<script type="application/javascript">(function(root) {
+  var docs_json = {"694f38f3-bff6-4005-9a9b-71d92b14a628":{"version":"3.7.3","title":"Bokeh Application","roots":[{"type":"object","name":"panel.models.browser.BrowserInfo","id":"4e3398ff-7f9a-474d-b27a-e7d510c416cc"},{"type":"object","name":"panel.models.comm_manager.CommManager","id":"803d9840-2347-4eff-8360-196c0d54d834","attributes":{"plot_id":"4e3398ff-7f9a-474d-b27a-e7d510c416cc","comm_id":"ff48050a3be54b55a7345088574e7c44","client_comm_id":"c13bc1d64a72496ab82dd8c97d39bbe5"}}],"defs":[{"type":"model","name":"ReactiveHTML1"},{"type":"model","name":"FlexBox1","properties":[{"name":"align_content","kind":"Any","default":"flex-start"},{"name":"align_items","kind":"Any","default":"flex-start"},{"name":"flex_direction","kind":"Any","default":"row"},{"name":"flex_wrap","kind":"Any","default":"wrap"},{"name":"gap","kind":"Any","default":""},{"name":"justify_content","kind":"Any","default":"flex-start"}]},{"type":"model","name":"FloatPanel1","properties":[{"name":"config","kind":"Any","default":{"type":"map"}},{"name":"contained","kind":"Any","default":true},{"name":"position","kind":"Any","default":"right-top"},{"name":"offsetx","kind":"Any","default":null},{"name":"offsety","kind":"Any","default":null},{"name":"theme","kind":"Any","default":"primary"},{"name":"status","kind":"Any","default":"normalized"}]},{"type":"model","name":"GridStack1","properties":[{"name":"ncols","kind":"Any","default":null},{"name":"nrows","kind":"Any","default":null},{"name":"allow_resize","kind":"Any","default":true},{"name":"allow_drag","kind":"Any","default":true},{"name":"state","kind":"Any","default":[]}]},{"type":"model","name":"drag1","properties":[{"name":"slider_width","kind":"Any","default":5},{"name":"slider_color","kind":"Any","default":"black"},{"name":"value","kind":"Any","default":50}]},{"type":"model","name":"click1","properties":[{"name":"terminal_output","kind":"Any","default":""},{"name":"debug_name","kind":"Any","default":""},{"name":"clears","kind":"Any","default":0}]},{"type":"model","name":"ReactiveESM1","properties":[{"name":"esm_constants","kind":"Any","default":{"type":"map"}}]},{"type":"model","name":"JSComponent1","properties":[{"name":"esm_constants","kind":"Any","default":{"type":"map"}}]},{"type":"model","name":"ReactComponent1","properties":[{"name":"use_shadow_dom","kind":"Any","default":true},{"name":"esm_constants","kind":"Any","default":{"type":"map"}}]},{"type":"model","name":"AnyWidgetComponent1","properties":[{"name":"use_shadow_dom","kind":"Any","default":true},{"name":"esm_constants","kind":"Any","default":{"type":"map"}}]},{"type":"model","name":"FastWrapper1","properties":[{"name":"object","kind":"Any","default":null},{"name":"style","kind":"Any","default":null}]},{"type":"model","name":"NotificationArea1","properties":[{"name":"js_events","kind":"Any","default":{"type":"map"}},{"name":"max_notifications","kind":"Any","default":5},{"name":"notifications","kind":"Any","default":[]},{"name":"position","kind":"Any","default":"bottom-right"},{"name":"_clear","kind":"Any","default":0},{"name":"types","kind":"Any","default":[{"type":"map","entries":[["type","warning"],["background","#ffc107"],["icon",{"type":"map","entries":[["className","fas fa-exclamation-triangle"],["tagName","i"],["color","white"]]}]]},{"type":"map","entries":[["type","info"],["background","#007bff"],["icon",{"type":"map","entries":[["className","fas fa-info-circle"],["tagName","i"],["color","white"]]}]]}]}]},{"type":"model","name":"Notification","properties":[{"name":"background","kind":"Any","default":null},{"name":"duration","kind":"Any","default":3000},{"name":"icon","kind":"Any","default":null},{"name":"message","kind":"Any","default":""},{"name":"notification_type","kind":"Any","default":null},{"name":"_rendered","kind":"Any","default":false},{"name":"_destroyed","kind":"Any","default":false}]},{"type":"model","name":"TemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]},{"type":"model","name":"BootstrapTemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]},{"type":"model","name":"TemplateEditor1","properties":[{"name":"layout","kind":"Any","default":[]}]},{"type":"model","name":"MaterialTemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]},{"type":"model","name":"request_value1","properties":[{"name":"fill","kind":"Any","default":"none"},{"name":"_synced","kind":"Any","default":null},{"name":"_request_sync","kind":"Any","default":0}]},{"type":"model","name":"holoviews.plotting.bokeh.raster.HoverModel","properties":[{"name":"xy","kind":"Any","default":null},{"name":"data","kind":"Any","default":null}]}]}};
+  var render_items = [{"docid":"694f38f3-bff6-4005-9a9b-71d92b14a628","roots":{"4e3398ff-7f9a-474d-b27a-e7d510c416cc":"d1b2fee0-9964-46d6-a6e0-005c15ce175d"},"root_ids":["4e3398ff-7f9a-474d-b27a-e7d510c416cc"]}];
+  var docs = Object.values(docs_json)
+  if (!docs) {
+    return
+  }
+  const py_version = docs[0].version.replace('rc', '-rc.').replace('.dev', '-dev.')
+  async function embed_document(root) {
+    var Bokeh = get_bokeh(root)
+    await Bokeh.embed.embed_items_notebook(docs_json, render_items);
+    for (const render_item of render_items) {
+      for (const root_id of render_item.root_ids) {
+	const id_el = document.getElementById(root_id)
+	if (id_el.children.length && id_el.children[0].hasAttribute('data-root-id')) {
+	  const root_el = id_el.children[0]
+	  root_el.id = root_el.id + '-rendered'
+	  for (const child of root_el.children) {
+            // Ensure JupyterLab does not capture keyboard shortcuts
+            // see: https://jupyterlab.readthedocs.io/en/4.1.x/extension/notebook.html#keyboard-interaction-model
+	    child.setAttribute('data-lm-suppress-shortcuts', 'true')
+	  }
+	}
+      }
+    }
+  }
+  function get_bokeh(root) {
+    if (root.Bokeh === undefined) {
+      return null
+    } else if (root.Bokeh.version !== py_version) {
+      if (root.Bokeh.versions === undefined || !root.Bokeh.versions.has(py_version)) {
+	return null
+      }
+      return root.Bokeh.versions.get(py_version);
+    } else if (root.Bokeh.version === py_version) {
+      return root.Bokeh
+    }
+    return null
+  }
+  function is_loaded(root) {
+    var Bokeh = get_bokeh(root)
+    return (Bokeh != null && Bokeh.Panel !== undefined)
+  }
+  if (is_loaded(root)) {
+    embed_document(root);
+  } else {
+    var attempts = 0;
+    var timer = setInterval(function(root) {
+      if (is_loaded(root)) {
+        clearInterval(timer);
+        embed_document(root);
+      } else if (document.readyState == "complete") {
+        attempts++;
+        if (attempts > 200) {
+          clearInterval(timer);
+	  var Bokeh = get_bokeh(root)
+	  if (Bokeh == null || Bokeh.Panel == null) {
+            console.warn("Panel: ERROR: Unable to run Panel code because Bokeh or Panel library is missing");
+	  } else {
+	    console.warn("Panel: WARNING: Attempting to render but not all required libraries could be resolved.")
+	    embed_document(root)
+	  }
+        }
+      }
+    }, 25, root)
+  }
+})(window);</script></div><div class="output text_html"><div id='92bc2497-a648-4fa3-9b9b-aae7c0e13fb9'>
+  <div id="e53e6a55-062a-40a2-976b-bcccb153cbef" data-root-id="92bc2497-a648-4fa3-9b9b-aae7c0e13fb9" style="display: contents;"></div>
+</div>
+<script type="application/javascript">(function(root) {
+  var docs_json = {"83f70f92-ff58-4bc7-a21f-290479a9e5b3":{"version":"3.7.3","title":"Bokeh Application","roots":[{"type":"object","name":"Row","id":"92bc2497-a648-4fa3-9b9b-aae7c0e13fb9","attributes":{"name":"Row00280","tags":["embedded"],"stylesheets":["\n:host(.pn-loading):before, .pn-loading:before {\n  background-color: #c3c3c3;\n  mask-size: auto calc(min(50%, 400px));\n  -webkit-mask-size: auto calc(min(50%, 400px));\n}",{"type":"object","name":"ImportedStyleSheet","id":"bf290fbd-0f71-487a-86ce-a09e013831a9","attributes":{"url":"https://cdn.holoviz.org/panel/1.7.4/dist/css/loading.css"}},{"type":"object","name":"ImportedStyleSheet","id":"bb5def23-d58c-45ef-b06d-0d922acf37cc","attributes":{"url":"https://cdn.holoviz.org/panel/1.7.4/dist/css/listpanel.css"}},{"type":"object","name":"ImportedStyleSheet","id":"e843414b-72cb-454f-b3ea-b94f9e98dd16","attributes":{"url":"https://cdn.holoviz.org/panel/1.7.4/dist/bundled/theme/default.css"}},{"type":"object","name":"ImportedStyleSheet","id":"cfa4bd85-25e4-4113-b937-e2ba3f4cd95f","attributes":{"url":"https://cdn.holoviz.org/panel/1.7.4/dist/bundled/theme/native.css"}}],"min_width":700,"margin":0,"sizing_mode":"stretch_width","align":"start","children":[{"type":"object","name":"Spacer","id":"d1afdc1f-5ebc-42af-9fbe-7468308e4d2b","attributes":{"name":"HSpacer00284","stylesheets":["\n:host(.pn-loading):before, .pn-loading:before {\n  background-color: #c3c3c3;\n  mask-size: auto calc(min(50%, 400px));\n  -webkit-mask-size: auto calc(min(50%, 400px));\n}",{"id":"bf290fbd-0f71-487a-86ce-a09e013831a9"},{"id":"e843414b-72cb-454f-b3ea-b94f9e98dd16"},{"id":"cfa4bd85-25e4-4113-b937-e2ba3f4cd95f"}],"min_width":0,"margin":0,"sizing_mode":"stretch_width","align":"start"}},{"type":"object","name":"Figure","id":"15333022-9736-4bc6-b9d9-f73dc0e1516d","attributes":{"width":700,"height":300,"margin":[5,10],"sizing_mode":"fixed","align":"start","x_range":{"type":"object","name":"FactorRange","id":"05a6ec0b-3b94-495e-aba2-b91523034807","attributes":{"name":"species","tags":[[["species",null]],[]],"factors":["Adelie","Chinstrap","Gentoo"]}},"y_range":{"type":"object","name":"Range1d","id":"ea9b7e38-7af7-4097-abe5-bcbcb8f47bbb","attributes":{"name":"count","tags":[[["count",null]],{"type":"map","entries":[["invert_yaxis",false],["autorange",false]]}],"end":153.8,"reset_start":0.0,"reset_end":153.8}},"x_scale":{"type":"object","name":"CategoricalScale","id":"8ea88156-ebe7-4ead-836f-a7715186d09f"},"y_scale":{"type":"object","name":"LinearScale","id":"e1edbec0-e486-4989-aebd-1a8abeb1466b"},"title":{"type":"object","name":"Title","id":"58c20f00-ef6c-4ea7-9724-b0e3a8ab3423","attributes":{"text":"Stacked Bar Chart (Bokeh)","text_color":"black","text_font_size":"12pt"}},"renderers":[{"type":"object","name":"GlyphRenderer","id":"13ade3a8-f509-487d-a478-88c9ba68bc0e","attributes":{"data_source":{"type":"object","name":"ColumnDataSource","id":"78c3c6af-2753-49e6-b1f1-b429d7cf115d","attributes":{"selected":{"type":"object","name":"Selection","id":"428438eb-fc9d-47bd-a05e-a85a890d943c","attributes":{"indices":[],"line_indices":[]}},"selection_policy":{"type":"object","name":"UnionRenderers","id":"568c8122-ce3e-4256-b39d-485bd5ef0d25"},"data":{"type":"map","entries":[["bottom",{"type":"ndarray","array":{"type":"bytes","data":"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAUkAAAAAAAABBQAAAAAAAAE1A"},"shape":[6],"dtype":"float64","order":"little"}],["top",{"type":"ndarray","array":{"type":"bytes","data":"AAAAAABAUkAAAAAAAABBQAAAAAAAAE1AAAAAAABAYkAAAAAAAABRQAAAAAAAwF1A"},"shape":[6],"dtype":"float64","order":"little"}],["species",["Adelie","Chinstrap","Gentoo","Adelie","Chinstrap","Gentoo"]],["sex",["female","female","female","male","male","male"]],["count",{"type":"ndarray","array":{"type":"bytes","data":"SQAAACIAAAA6AAAASQAAACIAAAA9AAAA"},"shape":[6],"dtype":"int32","order":"little"}]]}}},"view":{"type":"object","name":"CDSView","id":"d2ed7fb8-a096-4355-9fbf-d046352ac823","attributes":{"filter":{"type":"object","name":"AllIndices","id":"46c50bf1-942d-4a03-b354-a4e979cd1ea2"}}},"glyph":{"type":"object","name":"VBar","id":"ab73e74b-98b3-407e-8f2b-cf00d5c43370","attributes":{"tags":["apply_ranges"],"x":{"type":"field","field":"species"},"width":{"type":"value","value":0.8},"bottom":{"type":"field","field":"bottom"},"top":{"type":"field","field":"top"},"fill_color":{"type":"field","field":"sex","transform":{"type":"object","name":"CategoricalColorMapper","id":"67cb8850-02c5-4912-abbd-92790313121a","attributes":{"palette":["#30a2da","#fc4f30"],"factors":["female","male"]}}},"hatch_color":{"type":"field","field":"sex","transform":{"id":"67cb8850-02c5-4912-abbd-92790313121a"}}}},"selection_glyph":{"type":"object","name":"VBar","id":"d4ae819a-50ea-4a43-b9e4-71efdbf78735","attributes":{"tags":["apply_ranges"],"x":{"type":"field","field":"species"},"width":{"type":"value","value":0.8},"bottom":{"type":"field","field":"bottom"},"top":{"type":"field","field":"top"},"line_color":{"type":"value","value":"black"},"line_alpha":{"type":"value","value":1.0},"line_width":{"type":"value","value":1},"line_join":{"type":"value","value":"bevel"},"line_cap":{"type":"value","value":"butt"},"line_dash":{"type":"value","value":[]},"line_dash_offset":{"type":"value","value":0},"fill_color":{"type":"field","field":"sex","transform":{"id":"67cb8850-02c5-4912-abbd-92790313121a"}},"fill_alpha":{"type":"value","value":1.0},"hatch_color":{"type":"field","field":"sex","transform":{"id":"67cb8850-02c5-4912-abbd-92790313121a"}},"hatch_alpha":{"type":"value","value":1.0},"hatch_scale":{"type":"value","value":12.0},"hatch_pattern":{"type":"value","value":null},"hatch_weight":{"type":"value","value":1.0}}},"nonselection_glyph":{"type":"object","name":"VBar","id":"2aafcf63-94b7-4b78-842a-5ef298fe76ea","attributes":{"tags":["apply_ranges"],"x":{"type":"field","field":"species"},"width":{"type":"value","value":0.8},"bottom":{"type":"field","field":"bottom"},"top":{"type":"field","field":"top"},"line_alpha":{"type":"value","value":0.1},"fill_color":{"type":"field","field":"sex","transform":{"id":"67cb8850-02c5-4912-abbd-92790313121a"}},"fill_alpha":{"type":"value","value":0.1},"hatch_color":{"type":"field","field":"sex","transform":{"id":"67cb8850-02c5-4912-abbd-92790313121a"}},"hatch_alpha":{"type":"value","value":0.1}}},"muted_glyph":{"type":"object","name":"VBar","id":"c83b583f-4710-4e95-8261-868c7178989d","attributes":{"tags":["apply_ranges"],"x":{"type":"field","field":"species"},"width":{"type":"value","value":0.8},"bottom":{"type":"field","field":"bottom"},"top":{"type":"field","field":"top"},"line_alpha":{"type":"value","value":0.2},"fill_color":{"type":"field","field":"sex","transform":{"id":"67cb8850-02c5-4912-abbd-92790313121a"}},"fill_alpha":{"type":"value","value":0.2},"hatch_color":{"type":"field","field":"sex","transform":{"id":"67cb8850-02c5-4912-abbd-92790313121a"}},"hatch_alpha":{"type":"value","value":0.2}}}}}],"toolbar":{"type":"object","name":"Toolbar","id":"100b63e1-186f-443d-b2cd-d7b1175afa33","attributes":{"tools":[{"type":"object","name":"WheelZoomTool","id":"380c7f5a-24da-4ceb-911b-ba992a4f67e6","attributes":{"tags":["hv_created"],"renderers":"auto","zoom_together":"none"}},{"type":"object","name":"HoverTool","id":"ebe205ad-f6d0-4b07-96be-90121bd66aa6","attributes":{"tags":["hv_created"],"renderers":[{"id":"13ade3a8-f509-487d-a478-88c9ba68bc0e"}],"tooltips":[["species","@{species}"],["sex","@{sex}"],["count","@{count}"]]}},{"type":"object","name":"SaveTool","id":"8811edb5-c23b-47f9-ac15-ee8cd6a98f2c"},{"type":"object","name":"PanTool","id":"186d8c07-6a7a-4d9b-80a4-484c011e20ad"},{"type":"object","name":"BoxZoomTool","id":"0ad03c5f-933a-4b50-aabd-24e9649c4d7e","attributes":{"dimensions":"both","overlay":{"type":"object","name":"BoxAnnotation","id":"86a49ab9-e792-4a82-91d0-b663bc3920de","attributes":{"syncable":false,"line_color":"black","line_alpha":1.0,"line_width":2,"line_dash":[4,4],"fill_color":"lightgrey","fill_alpha":0.5,"level":"overlay","visible":false,"left":{"type":"number","value":"nan"},"right":{"type":"number","value":"nan"},"top":{"type":"number","value":"nan"},"bottom":{"type":"number","value":"nan"},"left_units":"canvas","right_units":"canvas","top_units":"canvas","bottom_units":"canvas","handles":{"type":"object","name":"BoxInteractionHandles","id":"2896f870-b026-4101-889d-496683990828","attributes":{"all":{"type":"object","name":"AreaVisuals","id":"6418291f-b09a-42ba-8331-17e70a10a8c1","attributes":{"fill_color":"white","hover_fill_color":"lightgray"}}}}}}}},{"type":"object","name":"ResetTool","id":"b51712dc-5ee2-46c7-b782-efc722149665"}],"active_drag":{"id":"186d8c07-6a7a-4d9b-80a4-484c011e20ad"},"active_scroll":{"id":"380c7f5a-24da-4ceb-911b-ba992a4f67e6"}}},"left":[{"type":"object","name":"LinearAxis","id":"3f8c9628-d081-4797-9b86-d6b2dc4abccb","attributes":{"ticker":{"type":"object","name":"BasicTicker","id":"137a54c5-04d5-4297-89e7-de499492268a","attributes":{"mantissas":[1,2,5]}},"formatter":{"type":"object","name":"BasicTickFormatter","id":"3c4a7c95-d3f4-40ee-9351-93ebfad80746"},"axis_label":"Count","major_label_policy":{"type":"object","name":"AllLabels","id":"0f05bde0-501b-4260-826d-140f22b84be7"}}}],"right":[{"type":"object","name":"Legend","id":"a0706f8c-663d-4dc5-8a4b-70f6f1b1b6b1","attributes":{"location":[0,0],"items":[{"type":"object","name":"LegendItem","id":"0b6ea881-5b2e-4cf0-a5ec-8caa7f910d0b","attributes":{"label":{"type":"field","field":"sex"},"renderers":[{"id":"13ade3a8-f509-487d-a478-88c9ba68bc0e"}]}}]}}],"below":[{"type":"object","name":"CategoricalAxis","id":"ef172c5d-02ef-4d1c-90d7-7fcc7a007b2b","attributes":{"ticker":{"type":"object","name":"CategoricalTicker","id":"26f6e828-f63d-4b86-b25e-55c36cc82288"},"formatter":{"type":"object","name":"CategoricalTickFormatter","id":"517006b4-e9dd-4a6f-bdc1-a5572d8d24ff"},"axis_label":"Species","major_label_policy":{"type":"object","name":"AllLabels","id":"7c419758-3171-43d5-9c8e-2bc4af2572aa"}}}],"center":[{"type":"object","name":"Grid","id":"0ddd2ea3-9b43-4ea6-819d-650110fe2a6f","attributes":{"axis":{"id":"ef172c5d-02ef-4d1c-90d7-7fcc7a007b2b"},"grid_line_color":null}},{"type":"object","name":"Grid","id":"43ffebbe-ca14-4428-aed3-20cf18cabdf8","attributes":{"dimension":1,"axis":{"id":"3f8c9628-d081-4797-9b86-d6b2dc4abccb"},"grid_line_color":null}}],"min_border_top":10,"min_border_bottom":10,"min_border_left":10,"min_border_right":10,"output_backend":"webgl"}},{"type":"object","name":"Spacer","id":"ff6266d5-54f9-49b4-bace-56e6a10309e7","attributes":{"name":"HSpacer00285","stylesheets":["\n:host(.pn-loading):before, .pn-loading:before {\n  background-color: #c3c3c3;\n  mask-size: auto calc(min(50%, 400px));\n  -webkit-mask-size: auto calc(min(50%, 400px));\n}",{"id":"bf290fbd-0f71-487a-86ce-a09e013831a9"},{"id":"e843414b-72cb-454f-b3ea-b94f9e98dd16"},{"id":"cfa4bd85-25e4-4113-b937-e2ba3f4cd95f"}],"min_width":0,"margin":0,"sizing_mode":"stretch_width","align":"start"}}]}}],"defs":[{"type":"model","name":"ReactiveHTML1"},{"type":"model","name":"FlexBox1","properties":[{"name":"align_content","kind":"Any","default":"flex-start"},{"name":"align_items","kind":"Any","default":"flex-start"},{"name":"flex_direction","kind":"Any","default":"row"},{"name":"flex_wrap","kind":"Any","default":"wrap"},{"name":"gap","kind":"Any","default":""},{"name":"justify_content","kind":"Any","default":"flex-start"}]},{"type":"model","name":"FloatPanel1","properties":[{"name":"config","kind":"Any","default":{"type":"map"}},{"name":"contained","kind":"Any","default":true},{"name":"position","kind":"Any","default":"right-top"},{"name":"offsetx","kind":"Any","default":null},{"name":"offsety","kind":"Any","default":null},{"name":"theme","kind":"Any","default":"primary"},{"name":"status","kind":"Any","default":"normalized"}]},{"type":"model","name":"GridStack1","properties":[{"name":"ncols","kind":"Any","default":null},{"name":"nrows","kind":"Any","default":null},{"name":"allow_resize","kind":"Any","default":true},{"name":"allow_drag","kind":"Any","default":true},{"name":"state","kind":"Any","default":[]}]},{"type":"model","name":"drag1","properties":[{"name":"slider_width","kind":"Any","default":5},{"name":"slider_color","kind":"Any","default":"black"},{"name":"value","kind":"Any","default":50}]},{"type":"model","name":"click1","properties":[{"name":"terminal_output","kind":"Any","default":""},{"name":"debug_name","kind":"Any","default":""},{"name":"clears","kind":"Any","default":0}]},{"type":"model","name":"ReactiveESM1","properties":[{"name":"esm_constants","kind":"Any","default":{"type":"map"}}]},{"type":"model","name":"JSComponent1","properties":[{"name":"esm_constants","kind":"Any","default":{"type":"map"}}]},{"type":"model","name":"ReactComponent1","properties":[{"name":"use_shadow_dom","kind":"Any","default":true},{"name":"esm_constants","kind":"Any","default":{"type":"map"}}]},{"type":"model","name":"AnyWidgetComponent1","properties":[{"name":"use_shadow_dom","kind":"Any","default":true},{"name":"esm_constants","kind":"Any","default":{"type":"map"}}]},{"type":"model","name":"FastWrapper1","properties":[{"name":"object","kind":"Any","default":null},{"name":"style","kind":"Any","default":null}]},{"type":"model","name":"NotificationArea1","properties":[{"name":"js_events","kind":"Any","default":{"type":"map"}},{"name":"max_notifications","kind":"Any","default":5},{"name":"notifications","kind":"Any","default":[]},{"name":"position","kind":"Any","default":"bottom-right"},{"name":"_clear","kind":"Any","default":0},{"name":"types","kind":"Any","default":[{"type":"map","entries":[["type","warning"],["background","#ffc107"],["icon",{"type":"map","entries":[["className","fas fa-exclamation-triangle"],["tagName","i"],["color","white"]]}]]},{"type":"map","entries":[["type","info"],["background","#007bff"],["icon",{"type":"map","entries":[["className","fas fa-info-circle"],["tagName","i"],["color","white"]]}]]}]}]},{"type":"model","name":"Notification","properties":[{"name":"background","kind":"Any","default":null},{"name":"duration","kind":"Any","default":3000},{"name":"icon","kind":"Any","default":null},{"name":"message","kind":"Any","default":""},{"name":"notification_type","kind":"Any","default":null},{"name":"_rendered","kind":"Any","default":false},{"name":"_destroyed","kind":"Any","default":false}]},{"type":"model","name":"TemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]},{"type":"model","name":"BootstrapTemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]},{"type":"model","name":"TemplateEditor1","properties":[{"name":"layout","kind":"Any","default":[]}]},{"type":"model","name":"MaterialTemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]},{"type":"model","name":"request_value1","properties":[{"name":"fill","kind":"Any","default":"none"},{"name":"_synced","kind":"Any","default":null},{"name":"_request_sync","kind":"Any","default":0}]},{"type":"model","name":"holoviews.plotting.bokeh.raster.HoverModel","properties":[{"name":"xy","kind":"Any","default":null},{"name":"data","kind":"Any","default":null}]}]}};
+  var render_items = [{"docid":"83f70f92-ff58-4bc7-a21f-290479a9e5b3","roots":{"92bc2497-a648-4fa3-9b9b-aae7c0e13fb9":"e53e6a55-062a-40a2-976b-bcccb153cbef"},"root_ids":["92bc2497-a648-4fa3-9b9b-aae7c0e13fb9"]}];
+  var docs = Object.values(docs_json)
+  if (!docs) {
+    return
+  }
+  const py_version = docs[0].version.replace('rc', '-rc.').replace('.dev', '-dev.')
+  async function embed_document(root) {
+    var Bokeh = get_bokeh(root)
+    await Bokeh.embed.embed_items_notebook(docs_json, render_items);
+    for (const render_item of render_items) {
+      for (const root_id of render_item.root_ids) {
+	const id_el = document.getElementById(root_id)
+	if (id_el.children.length && id_el.children[0].hasAttribute('data-root-id')) {
+	  const root_el = id_el.children[0]
+	  root_el.id = root_el.id + '-rendered'
+	  for (const child of root_el.children) {
+            // Ensure JupyterLab does not capture keyboard shortcuts
+            // see: https://jupyterlab.readthedocs.io/en/4.1.x/extension/notebook.html#keyboard-interaction-model
+	    child.setAttribute('data-lm-suppress-shortcuts', 'true')
+	  }
+	}
+      }
+    }
+  }
+  function get_bokeh(root) {
+    if (root.Bokeh === undefined) {
+      return null
+    } else if (root.Bokeh.version !== py_version) {
+      if (root.Bokeh.versions === undefined || !root.Bokeh.versions.has(py_version)) {
+	return null
+      }
+      return root.Bokeh.versions.get(py_version);
+    } else if (root.Bokeh.version === py_version) {
+      return root.Bokeh
+    }
+    return null
+  }
+  function is_loaded(root) {
+    var Bokeh = get_bokeh(root)
+    return (Bokeh != null && Bokeh.Panel !== undefined)
+  }
+  if (is_loaded(root)) {
+    embed_document(root);
+  } else {
+    var attempts = 0;
+    var timer = setInterval(function(root) {
+      if (is_loaded(root)) {
+        clearInterval(timer);
+        embed_document(root);
+      } else if (document.readyState == "complete") {
+        attempts++;
+        if (attempts > 200) {
+          clearInterval(timer);
+	  var Bokeh = get_bokeh(root)
+	  if (Bokeh == null || Bokeh.Panel == null) {
+            console.warn("Panel: ERROR: Unable to run Panel code because Bokeh or Panel library is missing");
+	  } else {
+	    console.warn("Panel: WARNING: Attempting to render but not all required libraries could be resolved.")
+	    embed_document(root)
+	  }
+        }
+      }
+    }, 25, root)
+  }
+})(window);</script></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">hvplot.pandas</span>  <span class="c1"># noqa</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">hvsampledata</span>
+
+<span class="n">hvplot</span><span class="o">.</span><span class="n">extension</span><span class="p">(</span><span class="s1">&#39;matplotlib&#39;</span><span class="p">)</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">hvsampledata</span><span class="o">.</span><span class="n">penguins</span><span class="p">(</span><span class="s1">&#39;pandas&#39;</span><span class="p">)</span>
+
+<span class="n">grouped</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;species&#39;</span><span class="p">,</span> <span class="s1">&#39;sex&#39;</span><span class="p">],</span> <span class="n">observed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;count&#39;</span><span class="p">)</span>
+
+<span class="n">grouped</span><span class="o">.</span><span class="n">hvplot</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="s1">&#39;species&#39;</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="s1">&#39;count&#39;</span><span class="p">,</span>
+    <span class="n">by</span><span class="o">=</span><span class="s1">&#39;sex&#39;</span><span class="p">,</span>
+    <span class="n">stacked</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Stacked Bar Chart (Matplotlib)&#39;</span><span class="p">,</span>
+    <span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Species&#39;</span><span class="p">,</span>
+    <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Count&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><script type="esms-options">{"shimMode": true}</script><style>*[data-root-id],
+*[data-root-id] > * {
+  box-sizing: border-box;
+  font-family: var(--jp-ui-font-family);
+  font-size: var(--jp-ui-font-size1);
+  color: var(--vscode-editor-foreground, var(--jp-ui-font-color1));
+}
+
+/* Override VSCode background color */
+.cell-output-ipywidget-background:has(
+  > .cell-output-ipywidget-background > .lm-Widget > *[data-root-id]
+),
+.cell-output-ipywidget-background:has(> .lm-Widget > *[data-root-id]) {
+  background-color: transparent !important;
+}
+</style></div><script type="application/javascript">(function(root) {
+  function now() {
+    return new Date();
+  }
+
+  const force = true;
+  const py_version = '3.7.3'.replace('rc', '-rc.').replace('.dev', '-dev.');
+  const reloading = false;
+  const Bokeh = root.Bokeh;
+
+  // Set a timeout for this load but only if we are not already initializing
+  if (typeof (root._bokeh_timeout) === "undefined" || (force || !root._bokeh_is_initializing)) {
+    root._bokeh_timeout = Date.now() + 5000;
+    root._bokeh_failed_load = false;
+  }
+
+  function run_callbacks() {
+    try {
+      root._bokeh_onload_callbacks.forEach(function(callback) {
+        if (callback != null)
+          callback();
+      });
+    } finally {
+      delete root._bokeh_onload_callbacks;
+    }
+    console.debug("Bokeh: all callbacks have finished");
+  }
+
+  function load_libs(css_urls, js_urls, js_modules, js_exports, callback) {
+    if (css_urls == null) css_urls = [];
+    if (js_urls == null) js_urls = [];
+    if (js_modules == null) js_modules = [];
+    if (js_exports == null) js_exports = {};
+
+    root._bokeh_onload_callbacks.push(callback);
+
+    if (root._bokeh_is_loading > 0) {
+      // Don't load bokeh if it is still initializing
+      console.debug("Bokeh: BokehJS is being loaded, scheduling callback at", now());
+      return null;
+    } else if (js_urls.length === 0 && js_modules.length === 0 && Object.keys(js_exports).length === 0) {
+      // There is nothing to load
+      run_callbacks();
+      return null;
+    }
+
+    function on_load() {
+      root._bokeh_is_loading--;
+      if (root._bokeh_is_loading === 0) {
+        console.debug("Bokeh: all BokehJS libraries/stylesheets loaded");
+        run_callbacks()
+      }
+    }
+    window._bokeh_on_load = on_load
+
+    function on_error(e) {
+      const src_el = e.srcElement
+      console.error("failed to load " + (src_el.href || src_el.src));
+    }
+
+    const skip = [];
+    if (window.requirejs) {
+      window.requirejs.config({'packages': {}, 'paths': {}, 'shim': {}});
+      root._bokeh_is_loading = css_urls.length + 0;
+    } else {
+      root._bokeh_is_loading = css_urls.length + js_urls.length + js_modules.length + Object.keys(js_exports).length;
+    }
+
+    const existing_stylesheets = []
+    const links = document.getElementsByTagName('link')
+    for (let i = 0; i < links.length; i++) {
+      const link = links[i]
+      if (link.href != null) {
+        existing_stylesheets.push(link.href)
+      }
+    }
+    for (let i = 0; i < css_urls.length; i++) {
+      const url = css_urls[i];
+      const escaped = encodeURI(url)
+      if (existing_stylesheets.indexOf(escaped) !== -1) {
+        on_load()
+        continue;
+      }
+      const element = document.createElement("link");
+      element.onload = on_load;
+      element.onerror = on_error;
+      element.rel = "stylesheet";
+      element.type = "text/css";
+      element.href = url;
+      console.debug("Bokeh: injecting link tag for BokehJS stylesheet: ", url);
+      document.body.appendChild(element);
+    }    var existing_scripts = []
+    const scripts = document.getElementsByTagName('script')
+    for (let i = 0; i < scripts.length; i++) {
+      var script = scripts[i]
+      if (script.src != null) {
+        existing_scripts.push(script.src)
+      }
+    }
+    for (let i = 0; i < js_urls.length; i++) {
+      const url = js_urls[i];
+      const escaped = encodeURI(url)
+      if (skip.indexOf(escaped) !== -1 || existing_scripts.indexOf(escaped) !== -1) {
+        if (!window.requirejs) {
+          on_load();
+        }
+        continue;
+      }
+      const element = document.createElement('script');
+      element.onload = on_load;
+      element.onerror = on_error;
+      element.async = false;
+      element.src = url;
+      console.debug("Bokeh: injecting script tag for BokehJS library: ", url);
+      document.head.appendChild(element);
+    }
+    for (let i = 0; i < js_modules.length; i++) {
+      const url = js_modules[i];
+      const escaped = encodeURI(url)
+      if (skip.indexOf(escaped) !== -1 || existing_scripts.indexOf(escaped) !== -1) {
+        if (!window.requirejs) {
+          on_load();
+        }
+        continue;
+      }
+      var element = document.createElement('script');
+      element.onload = on_load;
+      element.onerror = on_error;
+      element.async = false;
+      element.src = url;
+      element.type = "module";
+      console.debug("Bokeh: injecting script tag for BokehJS library: ", url);
+      document.head.appendChild(element);
+    }
+    for (const name in js_exports) {
+      const url = js_exports[name];
+      const escaped = encodeURI(url)
+      if (skip.indexOf(escaped) >= 0 || root[name] != null) {
+        if (!window.requirejs) {
+          on_load();
+        }
+        continue;
+      }
+      var element = document.createElement('script');
+      element.onerror = on_error;
+      element.async = false;
+      element.type = "module";
+      console.debug("Bokeh: injecting script tag for BokehJS library: ", url);
+      element.textContent = `
+      import ${name} from "${url}"
+      window.${name} = ${name}
+      window._bokeh_on_load()
+      `
+      document.head.appendChild(element);
+    }
+    if (!js_urls.length && !js_modules.length) {
+      on_load()
+    }
+  };
+
+  function inject_raw_css(css) {
+    const element = document.createElement("style");
+    element.appendChild(document.createTextNode(css));
+    document.body.appendChild(element);
+  }
+
+  const js_urls = ["https://cdn.holoviz.org/panel/1.7.4/dist/bundled/reactiveesm/es-module-shims@^1.10.0/dist/es-module-shims.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-3.7.3.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-gl-3.7.3.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-widgets-3.7.3.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-tables-3.7.3.min.js", "https://cdn.holoviz.org/panel/1.7.4/dist/panel.min.js"];
+  const js_modules = [];
+  const js_exports = {};
+  const css_urls = [];
+  const inline_js = [    function(Bokeh) {
+      Bokeh.set_log_level("info");
+    },
+function(Bokeh) {} // ensure no trailing comma for IE
+  ];
+
+  function run_inline_js() {
+    if ((root.Bokeh !== undefined) || (force === true)) {
+      for (let i = 0; i < inline_js.length; i++) {
+        try {
+          inline_js[i].call(root, root.Bokeh);
+        } catch(e) {
+          if (!reloading) {
+            throw e;
+          }
+        }
+      }
+      // Cache old bokeh versions
+      if (Bokeh != undefined && !reloading) {
+        var NewBokeh = root.Bokeh;
+        if (Bokeh.versions === undefined) {
+          Bokeh.versions = new Map();
+        }
+        if (NewBokeh.version !== Bokeh.version) {
+          Bokeh.versions.set(NewBokeh.version, NewBokeh)
+        }
+        root.Bokeh = Bokeh;
+      }
+    } else if (Date.now() < root._bokeh_timeout) {
+      setTimeout(run_inline_js, 100);
+    } else if (!root._bokeh_failed_load) {
+      console.log("Bokeh: BokehJS failed to load within specified timeout.");
+      root._bokeh_failed_load = true;
+    }
+    root._bokeh_is_initializing = false
+  }
+
+  function load_or_wait() {
+    // Implement a backoff loop that tries to ensure we do not load multiple
+    // versions of Bokeh and its dependencies at the same time.
+    // In recent versions we use the root._bokeh_is_initializing flag
+    // to determine whether there is an ongoing attempt to initialize
+    // bokeh, however for backward compatibility we also try to ensure
+    // that we do not start loading a newer (Panel>=1.0 and Bokeh>3) version
+    // before older versions are fully initialized.
+    if (root._bokeh_is_initializing && Date.now() > root._bokeh_timeout) {
+      // If the timeout and bokeh was not successfully loaded we reset
+      // everything and try loading again
+      root._bokeh_timeout = Date.now() + 5000;
+      root._bokeh_is_initializing = false;
+      root._bokeh_onload_callbacks = undefined;
+      root._bokeh_is_loading = 0
+      console.log("Bokeh: BokehJS was loaded multiple times but one version failed to initialize.");
+      load_or_wait();
+    } else if (root._bokeh_is_initializing || (typeof root._bokeh_is_initializing === "undefined" && root._bokeh_onload_callbacks !== undefined)) {
+      setTimeout(load_or_wait, 100);
+    } else {
+      root._bokeh_is_initializing = true
+      root._bokeh_onload_callbacks = []
+      const bokeh_loaded = root.Bokeh != null && (root.Bokeh.version === py_version || (root.Bokeh.versions !== undefined && root.Bokeh.versions.has(py_version)));
+      if (!reloading && !bokeh_loaded) {
+        if (root.Bokeh) {
+          root.Bokeh = undefined;
+        }
+        console.debug("Bokeh: BokehJS not loaded, scheduling load and callback at", now());
+      }
+      load_libs(css_urls, js_urls, js_modules, js_exports, function() {
+        console.debug("Bokeh: BokehJS plotting callback run at", now());
+        run_inline_js();
+      });
+    }
+  }
+  // Give older versions of the autoload script a head-start to ensure
+  // they initialize before we start loading newer version.
+  setTimeout(load_or_wait, 100)
+}(window));</script><script type="application/javascript">
+if ((window.PyViz === undefined) || (window.PyViz instanceof HTMLElement)) {
+  window.PyViz = {comms: {}, comm_status:{}, kernels:{}, receivers: {}, plot_index: []}
+}
+
+
+    function JupyterCommManager() {
+    }
+
+    JupyterCommManager.prototype.register_target = function(plot_id, comm_id, msg_handler) {
+      if (window.comm_manager || ((window.Jupyter !== undefined) && (Jupyter.notebook.kernel != null))) {
+        var comm_manager = window.comm_manager || Jupyter.notebook.kernel.comm_manager;
+        comm_manager.register_target(comm_id, function(comm) {
+          comm.on_msg(msg_handler);
+        });
+      } else if ((plot_id in window.PyViz.kernels) && (window.PyViz.kernels[plot_id])) {
+        window.PyViz.kernels[plot_id].registerCommTarget(comm_id, function(comm) {
+          comm.onMsg = msg_handler;
+        });
+      } else if (typeof google != 'undefined' && google.colab.kernel != null) {
+        google.colab.kernel.comms.registerTarget(comm_id, (comm) => {
+          var messages = comm.messages[Symbol.asyncIterator]();
+          function processIteratorResult(result) {
+            var message = result.value;
+            var content = {data: message.data, comm_id};
+            var buffers = []
+            for (var buffer of message.buffers || []) {
+              buffers.push(new DataView(buffer))
+            }
+            var metadata = message.metadata || {};
+            var msg = {content, buffers, metadata}
+            msg_handler(msg);
+            return messages.next().then(processIteratorResult);
+          }
+          return messages.next().then(processIteratorResult);
+        })
+      }
+    }
+
+    JupyterCommManager.prototype.get_client_comm = function(plot_id, comm_id, msg_handler) {
+      if (comm_id in window.PyViz.comms) {
+        return window.PyViz.comms[comm_id];
+      } else if (window.comm_manager || ((window.Jupyter !== undefined) && (Jupyter.notebook.kernel != null))) {
+        var comm_manager = window.comm_manager || Jupyter.notebook.kernel.comm_manager;
+        var comm = comm_manager.new_comm(comm_id, {}, {}, {}, comm_id);
+        if (msg_handler) {
+          comm.on_msg(msg_handler);
+        }
+      } else if ((plot_id in window.PyViz.kernels) && (window.PyViz.kernels[plot_id])) {
+        var comm = window.PyViz.kernels[plot_id].connectToComm(comm_id);
+        let retries = 0;
+        const open = () => {
+          if (comm.active) {
+            comm.open();
+          } else if (retries > 3) {
+            console.warn('Comm target never activated')
+          } else {
+            retries += 1
+            setTimeout(open, 500)
+          }
+        }
+        if (comm.active) {
+          comm.open();
+        } else {
+          setTimeout(open, 500)
+        }
+        if (msg_handler) {
+          comm.onMsg = msg_handler;
+        }
+      } else if (typeof google != 'undefined' && google.colab.kernel != null) {
+        var comm_promise = google.colab.kernel.comms.open(comm_id)
+        comm_promise.then((comm) => {
+          window.PyViz.comms[comm_id] = comm;
+          if (msg_handler) {
+            var messages = comm.messages[Symbol.asyncIterator]();
+            function processIteratorResult(result) {
+              var message = result.value;
+              var content = {data: message.data};
+              var metadata = message.metadata || {comm_id};
+              var msg = {content, metadata}
+              msg_handler(msg);
+              return messages.next().then(processIteratorResult);
+            }
+            return messages.next().then(processIteratorResult);
+          }
+        })
+        var sendClosure = (data, metadata, buffers, disposeOnDone) => {
+          return comm_promise.then((comm) => {
+            comm.send(data, metadata, buffers, disposeOnDone);
+          });
+        };
+        var comm = {
+          send: sendClosure
+        };
+      }
+      window.PyViz.comms[comm_id] = comm;
+      return comm;
+    }
+    window.PyViz.comm_manager = new JupyterCommManager();
+    
+
+
+var JS_MIME_TYPE = 'application/javascript';
+var HTML_MIME_TYPE = 'text/html';
+var EXEC_MIME_TYPE = 'application/vnd.holoviews_exec.v0+json';
+var CLASS_NAME = 'output';
+
+/**
+ * Render data to the DOM node
+ */
+function render(props, node) {
+  var div = document.createElement("div");
+  var script = document.createElement("script");
+  node.appendChild(div);
+  node.appendChild(script);
+}
+
+/**
+ * Handle when a new output is added
+ */
+function handle_add_output(event, handle) {
+  var output_area = handle.output_area;
+  var output = handle.output;
+  if ((output.data == undefined) || (!output.data.hasOwnProperty(EXEC_MIME_TYPE))) {
+    return
+  }
+  var id = output.metadata[EXEC_MIME_TYPE]["id"];
+  var toinsert = output_area.element.find("." + CLASS_NAME.split(' ')[0]);
+  if (id !== undefined) {
+    var nchildren = toinsert.length;
+    var html_node = toinsert[nchildren-1].children[0];
+    html_node.innerHTML = output.data[HTML_MIME_TYPE];
+    var scripts = [];
+    var nodelist = html_node.querySelectorAll("script");
+    for (var i in nodelist) {
+      if (nodelist.hasOwnProperty(i)) {
+        scripts.push(nodelist[i])
+      }
+    }
+
+    scripts.forEach( function (oldScript) {
+      var newScript = document.createElement("script");
+      var attrs = [];
+      var nodemap = oldScript.attributes;
+      for (var j in nodemap) {
+        if (nodemap.hasOwnProperty(j)) {
+          attrs.push(nodemap[j])
+        }
+      }
+      attrs.forEach(function(attr) { newScript.setAttribute(attr.name, attr.value) });
+      newScript.appendChild(document.createTextNode(oldScript.innerHTML));
+      oldScript.parentNode.replaceChild(newScript, oldScript);
+    });
+    if (JS_MIME_TYPE in output.data) {
+      toinsert[nchildren-1].children[1].textContent = output.data[JS_MIME_TYPE];
+    }
+    output_area._hv_plot_id = id;
+    if ((window.Bokeh !== undefined) && (id in Bokeh.index)) {
+      window.PyViz.plot_index[id] = Bokeh.index[id];
+    } else {
+      window.PyViz.plot_index[id] = null;
+    }
+  } else if (output.metadata[EXEC_MIME_TYPE]["server_id"] !== undefined) {
+    var bk_div = document.createElement("div");
+    bk_div.innerHTML = output.data[HTML_MIME_TYPE];
+    var script_attrs = bk_div.children[0].attributes;
+    for (var i = 0; i < script_attrs.length; i++) {
+      toinsert[toinsert.length - 1].childNodes[1].setAttribute(script_attrs[i].name, script_attrs[i].value);
+    }
+    // store reference to server id on output_area
+    output_area._bokeh_server_id = output.metadata[EXEC_MIME_TYPE]["server_id"];
+  }
+}
+
+/**
+ * Handle when an output is cleared or removed
+ */
+function handle_clear_output(event, handle) {
+  var id = handle.cell.output_area._hv_plot_id;
+  var server_id = handle.cell.output_area._bokeh_server_id;
+  if (((id === undefined) || !(id in PyViz.plot_index)) && (server_id !== undefined)) { return; }
+  var comm = window.PyViz.comm_manager.get_client_comm("hv-extension-comm", "hv-extension-comm", function () {});
+  if (server_id !== null) {
+    comm.send({event_type: 'server_delete', 'id': server_id});
+    return;
+  } else if (comm !== null) {
+    comm.send({event_type: 'delete', 'id': id});
+  }
+  delete PyViz.plot_index[id];
+  if ((window.Bokeh !== undefined) & (id in window.Bokeh.index)) {
+    var doc = window.Bokeh.index[id].model.document
+    doc.clear();
+    const i = window.Bokeh.documents.indexOf(doc);
+    if (i > -1) {
+      window.Bokeh.documents.splice(i, 1);
+    }
+  }
+}
+
+/**
+ * Handle kernel restart event
+ */
+function handle_kernel_cleanup(event, handle) {
+  delete PyViz.comms["hv-extension-comm"];
+  window.PyViz.plot_index = {}
+}
+
+/**
+ * Handle update_display_data messages
+ */
+function handle_update_output(event, handle) {
+  handle_clear_output(event, {cell: {output_area: handle.output_area}})
+  handle_add_output(event, handle)
+}
+
+function register_renderer(events, OutputArea) {
+  function append_mime(data, metadata, element) {
+    // create a DOM node to render to
+    var toinsert = this.create_output_subarea(
+    metadata,
+    CLASS_NAME,
+    EXEC_MIME_TYPE
+    );
+    this.keyboard_manager.register_events(toinsert);
+    // Render to node
+    var props = {data: data, metadata: metadata[EXEC_MIME_TYPE]};
+    render(props, toinsert[0]);
+    element.append(toinsert);
+    return toinsert
+  }
+
+  events.on('output_added.OutputArea', handle_add_output);
+  events.on('output_updated.OutputArea', handle_update_output);
+  events.on('clear_output.CodeCell', handle_clear_output);
+  events.on('delete.Cell', handle_clear_output);
+  events.on('kernel_ready.Kernel', handle_kernel_cleanup);
+
+  OutputArea.prototype.register_mime_type(EXEC_MIME_TYPE, append_mime, {
+    safe: true,
+    index: 0
+  });
+}
+
+if (window.Jupyter !== undefined) {
+  try {
+    var events = require('base/js/events');
+    var OutputArea = require('notebook/js/outputarea').OutputArea;
+    if (OutputArea.prototype.mime_types().indexOf(EXEC_MIME_TYPE) == -1) {
+      register_renderer(events, OutputArea);
+    }
+  } catch(err) {
+  }
+}
+</script><div class="output text_html"><div id='6fe54121-790b-45e5-86d3-d03007e4f989'>
+  <div id="b51e0fd0-864e-4746-9144-07610a93b2e3" data-root-id="6fe54121-790b-45e5-86d3-d03007e4f989" style="display: contents;"></div>
+</div>
+<script type="application/javascript">(function(root) {
+  var docs_json = {"bfa1cdf7-a9b5-4602-9646-5fda7ad5f656":{"version":"3.7.3","title":"Bokeh Application","roots":[{"type":"object","name":"panel.models.browser.BrowserInfo","id":"6fe54121-790b-45e5-86d3-d03007e4f989"},{"type":"object","name":"panel.models.comm_manager.CommManager","id":"9b361197-0707-4632-b07f-fe4963c944f1","attributes":{"plot_id":"6fe54121-790b-45e5-86d3-d03007e4f989","comm_id":"29a5889c18f34e7793f84d18aee64342","client_comm_id":"70d71d14d4bd4725b432432a005a204d"}}],"defs":[{"type":"model","name":"ReactiveHTML1"},{"type":"model","name":"FlexBox1","properties":[{"name":"align_content","kind":"Any","default":"flex-start"},{"name":"align_items","kind":"Any","default":"flex-start"},{"name":"flex_direction","kind":"Any","default":"row"},{"name":"flex_wrap","kind":"Any","default":"wrap"},{"name":"gap","kind":"Any","default":""},{"name":"justify_content","kind":"Any","default":"flex-start"}]},{"type":"model","name":"FloatPanel1","properties":[{"name":"config","kind":"Any","default":{"type":"map"}},{"name":"contained","kind":"Any","default":true},{"name":"position","kind":"Any","default":"right-top"},{"name":"offsetx","kind":"Any","default":null},{"name":"offsety","kind":"Any","default":null},{"name":"theme","kind":"Any","default":"primary"},{"name":"status","kind":"Any","default":"normalized"}]},{"type":"model","name":"GridStack1","properties":[{"name":"ncols","kind":"Any","default":null},{"name":"nrows","kind":"Any","default":null},{"name":"allow_resize","kind":"Any","default":true},{"name":"allow_drag","kind":"Any","default":true},{"name":"state","kind":"Any","default":[]}]},{"type":"model","name":"drag1","properties":[{"name":"slider_width","kind":"Any","default":5},{"name":"slider_color","kind":"Any","default":"black"},{"name":"value","kind":"Any","default":50}]},{"type":"model","name":"click1","properties":[{"name":"terminal_output","kind":"Any","default":""},{"name":"debug_name","kind":"Any","default":""},{"name":"clears","kind":"Any","default":0}]},{"type":"model","name":"ReactiveESM1","properties":[{"name":"esm_constants","kind":"Any","default":{"type":"map"}}]},{"type":"model","name":"JSComponent1","properties":[{"name":"esm_constants","kind":"Any","default":{"type":"map"}}]},{"type":"model","name":"ReactComponent1","properties":[{"name":"use_shadow_dom","kind":"Any","default":true},{"name":"esm_constants","kind":"Any","default":{"type":"map"}}]},{"type":"model","name":"AnyWidgetComponent1","properties":[{"name":"use_shadow_dom","kind":"Any","default":true},{"name":"esm_constants","kind":"Any","default":{"type":"map"}}]},{"type":"model","name":"FastWrapper1","properties":[{"name":"object","kind":"Any","default":null},{"name":"style","kind":"Any","default":null}]},{"type":"model","name":"NotificationArea1","properties":[{"name":"js_events","kind":"Any","default":{"type":"map"}},{"name":"max_notifications","kind":"Any","default":5},{"name":"notifications","kind":"Any","default":[]},{"name":"position","kind":"Any","default":"bottom-right"},{"name":"_clear","kind":"Any","default":0},{"name":"types","kind":"Any","default":[{"type":"map","entries":[["type","warning"],["background","#ffc107"],["icon",{"type":"map","entries":[["className","fas fa-exclamation-triangle"],["tagName","i"],["color","white"]]}]]},{"type":"map","entries":[["type","info"],["background","#007bff"],["icon",{"type":"map","entries":[["className","fas fa-info-circle"],["tagName","i"],["color","white"]]}]]}]}]},{"type":"model","name":"Notification","properties":[{"name":"background","kind":"Any","default":null},{"name":"duration","kind":"Any","default":3000},{"name":"icon","kind":"Any","default":null},{"name":"message","kind":"Any","default":""},{"name":"notification_type","kind":"Any","default":null},{"name":"_rendered","kind":"Any","default":false},{"name":"_destroyed","kind":"Any","default":false}]},{"type":"model","name":"TemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]},{"type":"model","name":"BootstrapTemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]},{"type":"model","name":"TemplateEditor1","properties":[{"name":"layout","kind":"Any","default":[]}]},{"type":"model","name":"MaterialTemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]},{"type":"model","name":"request_value1","properties":[{"name":"fill","kind":"Any","default":"none"},{"name":"_synced","kind":"Any","default":null},{"name":"_request_sync","kind":"Any","default":0}]},{"type":"model","name":"holoviews.plotting.bokeh.raster.HoverModel","properties":[{"name":"xy","kind":"Any","default":null},{"name":"data","kind":"Any","default":null}]}]}};
+  var render_items = [{"docid":"bfa1cdf7-a9b5-4602-9646-5fda7ad5f656","roots":{"6fe54121-790b-45e5-86d3-d03007e4f989":"b51e0fd0-864e-4746-9144-07610a93b2e3"},"root_ids":["6fe54121-790b-45e5-86d3-d03007e4f989"]}];
+  var docs = Object.values(docs_json)
+  if (!docs) {
+    return
+  }
+  const py_version = docs[0].version.replace('rc', '-rc.').replace('.dev', '-dev.')
+  async function embed_document(root) {
+    var Bokeh = get_bokeh(root)
+    await Bokeh.embed.embed_items_notebook(docs_json, render_items);
+    for (const render_item of render_items) {
+      for (const root_id of render_item.root_ids) {
+	const id_el = document.getElementById(root_id)
+	if (id_el.children.length && id_el.children[0].hasAttribute('data-root-id')) {
+	  const root_el = id_el.children[0]
+	  root_el.id = root_el.id + '-rendered'
+	  for (const child of root_el.children) {
+            // Ensure JupyterLab does not capture keyboard shortcuts
+            // see: https://jupyterlab.readthedocs.io/en/4.1.x/extension/notebook.html#keyboard-interaction-model
+	    child.setAttribute('data-lm-suppress-shortcuts', 'true')
+	  }
+	}
+      }
+    }
+  }
+  function get_bokeh(root) {
+    if (root.Bokeh === undefined) {
+      return null
+    } else if (root.Bokeh.version !== py_version) {
+      if (root.Bokeh.versions === undefined || !root.Bokeh.versions.has(py_version)) {
+	return null
+      }
+      return root.Bokeh.versions.get(py_version);
+    } else if (root.Bokeh.version === py_version) {
+      return root.Bokeh
+    }
+    return null
+  }
+  function is_loaded(root) {
+    var Bokeh = get_bokeh(root)
+    return (Bokeh != null && Bokeh.Panel !== undefined)
+  }
+  if (is_loaded(root)) {
+    embed_document(root);
+  } else {
+    var attempts = 0;
+    var timer = setInterval(function(root) {
+      if (is_loaded(root)) {
+        clearInterval(timer);
+        embed_document(root);
+      } else if (document.readyState == "complete") {
+        attempts++;
+        if (attempts > 200) {
+          clearInterval(timer);
+	  var Bokeh = get_bokeh(root)
+	  if (Bokeh == null || Bokeh.Panel == null) {
+            console.warn("Panel: ERROR: Unable to run Panel code because Bokeh or Panel library is missing");
+	  } else {
+	    console.warn("Panel: WARNING: Attempting to render but not all required libraries could be resolved.")
+	    embed_document(root)
+	  }
+        }
+      }
+    }, 25, root)
+  }
+})(window);</script></div><div class="output text_html"><script type="esms-options">{"shimMode": true}</script><style>*[data-root-id],
+*[data-root-id] > * {
+  box-sizing: border-box;
+  font-family: var(--jp-ui-font-family);
+  font-size: var(--jp-ui-font-size1);
+  color: var(--vscode-editor-foreground, var(--jp-ui-font-color1));
+}
+
+/* Override VSCode background color */
+.cell-output-ipywidget-background:has(
+  > .cell-output-ipywidget-background > .lm-Widget > *[data-root-id]
+),
+.cell-output-ipywidget-background:has(> .lm-Widget > *[data-root-id]) {
+  background-color: transparent !important;
+}
+</style></div><script type="application/javascript">(function(root) {
+  function now() {
+    return new Date();
+  }
+
+  const force = false;
+  const py_version = '3.7.3'.replace('rc', '-rc.').replace('.dev', '-dev.');
+  const reloading = true;
+  const Bokeh = root.Bokeh;
+
+  // Set a timeout for this load but only if we are not already initializing
+  if (typeof (root._bokeh_timeout) === "undefined" || (force || !root._bokeh_is_initializing)) {
+    root._bokeh_timeout = Date.now() + 5000;
+    root._bokeh_failed_load = false;
+  }
+
+  function run_callbacks() {
+    try {
+      root._bokeh_onload_callbacks.forEach(function(callback) {
+        if (callback != null)
+          callback();
+      });
+    } finally {
+      delete root._bokeh_onload_callbacks;
+    }
+    console.debug("Bokeh: all callbacks have finished");
+  }
+
+  function load_libs(css_urls, js_urls, js_modules, js_exports, callback) {
+    if (css_urls == null) css_urls = [];
+    if (js_urls == null) js_urls = [];
+    if (js_modules == null) js_modules = [];
+    if (js_exports == null) js_exports = {};
+
+    root._bokeh_onload_callbacks.push(callback);
+
+    if (root._bokeh_is_loading > 0) {
+      // Don't load bokeh if it is still initializing
+      console.debug("Bokeh: BokehJS is being loaded, scheduling callback at", now());
+      return null;
+    } else if (js_urls.length === 0 && js_modules.length === 0 && Object.keys(js_exports).length === 0) {
+      // There is nothing to load
+      run_callbacks();
+      return null;
+    }
+
+    function on_load() {
+      root._bokeh_is_loading--;
+      if (root._bokeh_is_loading === 0) {
+        console.debug("Bokeh: all BokehJS libraries/stylesheets loaded");
+        run_callbacks()
+      }
+    }
+    window._bokeh_on_load = on_load
+
+    function on_error(e) {
+      const src_el = e.srcElement
+      console.error("failed to load " + (src_el.href || src_el.src));
+    }
+
+    const skip = [];
+    if (window.requirejs) {
+      window.requirejs.config({'packages': {}, 'paths': {}, 'shim': {}});
+      root._bokeh_is_loading = css_urls.length + 0;
+    } else {
+      root._bokeh_is_loading = css_urls.length + js_urls.length + js_modules.length + Object.keys(js_exports).length;
+    }
+
+    const existing_stylesheets = []
+    const links = document.getElementsByTagName('link')
+    for (let i = 0; i < links.length; i++) {
+      const link = links[i]
+      if (link.href != null) {
+        existing_stylesheets.push(link.href)
+      }
+    }
+    for (let i = 0; i < css_urls.length; i++) {
+      const url = css_urls[i];
+      const escaped = encodeURI(url)
+      if (existing_stylesheets.indexOf(escaped) !== -1) {
+        on_load()
+        continue;
+      }
+      const element = document.createElement("link");
+      element.onload = on_load;
+      element.onerror = on_error;
+      element.rel = "stylesheet";
+      element.type = "text/css";
+      element.href = url;
+      console.debug("Bokeh: injecting link tag for BokehJS stylesheet: ", url);
+      document.body.appendChild(element);
+    }    var existing_scripts = []
+    const scripts = document.getElementsByTagName('script')
+    for (let i = 0; i < scripts.length; i++) {
+      var script = scripts[i]
+      if (script.src != null) {
+        existing_scripts.push(script.src)
+      }
+    }
+    for (let i = 0; i < js_urls.length; i++) {
+      const url = js_urls[i];
+      const escaped = encodeURI(url)
+      if (skip.indexOf(escaped) !== -1 || existing_scripts.indexOf(escaped) !== -1) {
+        if (!window.requirejs) {
+          on_load();
+        }
+        continue;
+      }
+      const element = document.createElement('script');
+      element.onload = on_load;
+      element.onerror = on_error;
+      element.async = false;
+      element.src = url;
+      console.debug("Bokeh: injecting script tag for BokehJS library: ", url);
+      document.head.appendChild(element);
+    }
+    for (let i = 0; i < js_modules.length; i++) {
+      const url = js_modules[i];
+      const escaped = encodeURI(url)
+      if (skip.indexOf(escaped) !== -1 || existing_scripts.indexOf(escaped) !== -1) {
+        if (!window.requirejs) {
+          on_load();
+        }
+        continue;
+      }
+      var element = document.createElement('script');
+      element.onload = on_load;
+      element.onerror = on_error;
+      element.async = false;
+      element.src = url;
+      element.type = "module";
+      console.debug("Bokeh: injecting script tag for BokehJS library: ", url);
+      document.head.appendChild(element);
+    }
+    for (const name in js_exports) {
+      const url = js_exports[name];
+      const escaped = encodeURI(url)
+      if (skip.indexOf(escaped) >= 0 || root[name] != null) {
+        if (!window.requirejs) {
+          on_load();
+        }
+        continue;
+      }
+      var element = document.createElement('script');
+      element.onerror = on_error;
+      element.async = false;
+      element.type = "module";
+      console.debug("Bokeh: injecting script tag for BokehJS library: ", url);
+      element.textContent = `
+      import ${name} from "${url}"
+      window.${name} = ${name}
+      window._bokeh_on_load()
+      `
+      document.head.appendChild(element);
+    }
+    if (!js_urls.length && !js_modules.length) {
+      on_load()
+    }
+  };
+
+  function inject_raw_css(css) {
+    const element = document.createElement("style");
+    element.appendChild(document.createTextNode(css));
+    document.body.appendChild(element);
+  }
+
+  const js_urls = ["https://cdn.holoviz.org/panel/1.7.4/dist/bundled/reactiveesm/es-module-shims@^1.10.0/dist/es-module-shims.min.js"];
+  const js_modules = [];
+  const js_exports = {};
+  const css_urls = [];
+  const inline_js = [    function(Bokeh) {
+      Bokeh.set_log_level("info");
+    },
+function(Bokeh) {} // ensure no trailing comma for IE
+  ];
+
+  function run_inline_js() {
+    if ((root.Bokeh !== undefined) || (force === true)) {
+      for (let i = 0; i < inline_js.length; i++) {
+        try {
+          inline_js[i].call(root, root.Bokeh);
+        } catch(e) {
+          if (!reloading) {
+            throw e;
+          }
+        }
+      }
+      // Cache old bokeh versions
+      if (Bokeh != undefined && !reloading) {
+        var NewBokeh = root.Bokeh;
+        if (Bokeh.versions === undefined) {
+          Bokeh.versions = new Map();
+        }
+        if (NewBokeh.version !== Bokeh.version) {
+          Bokeh.versions.set(NewBokeh.version, NewBokeh)
+        }
+        root.Bokeh = Bokeh;
+      }
+    } else if (Date.now() < root._bokeh_timeout) {
+      setTimeout(run_inline_js, 100);
+    } else if (!root._bokeh_failed_load) {
+      console.log("Bokeh: BokehJS failed to load within specified timeout.");
+      root._bokeh_failed_load = true;
+    }
+    root._bokeh_is_initializing = false
+  }
+
+  function load_or_wait() {
+    // Implement a backoff loop that tries to ensure we do not load multiple
+    // versions of Bokeh and its dependencies at the same time.
+    // In recent versions we use the root._bokeh_is_initializing flag
+    // to determine whether there is an ongoing attempt to initialize
+    // bokeh, however for backward compatibility we also try to ensure
+    // that we do not start loading a newer (Panel>=1.0 and Bokeh>3) version
+    // before older versions are fully initialized.
+    if (root._bokeh_is_initializing && Date.now() > root._bokeh_timeout) {
+      // If the timeout and bokeh was not successfully loaded we reset
+      // everything and try loading again
+      root._bokeh_timeout = Date.now() + 5000;
+      root._bokeh_is_initializing = false;
+      root._bokeh_onload_callbacks = undefined;
+      root._bokeh_is_loading = 0
+      console.log("Bokeh: BokehJS was loaded multiple times but one version failed to initialize.");
+      load_or_wait();
+    } else if (root._bokeh_is_initializing || (typeof root._bokeh_is_initializing === "undefined" && root._bokeh_onload_callbacks !== undefined)) {
+      setTimeout(load_or_wait, 100);
+    } else {
+      root._bokeh_is_initializing = true
+      root._bokeh_onload_callbacks = []
+      const bokeh_loaded = root.Bokeh != null && (root.Bokeh.version === py_version || (root.Bokeh.versions !== undefined && root.Bokeh.versions.has(py_version)));
+      if (!reloading && !bokeh_loaded) {
+        if (root.Bokeh) {
+          root.Bokeh = undefined;
+        }
+        console.debug("Bokeh: BokehJS not loaded, scheduling load and callback at", now());
+      }
+      load_libs(css_urls, js_urls, js_modules, js_exports, function() {
+        console.debug("Bokeh: BokehJS plotting callback run at", now());
+        run_inline_js();
+      });
+    }
+  }
+  // Give older versions of the autoload script a head-start to ensure
+  // they initialize before we start loading newer version.
+  setTimeout(load_or_wait, 100)
+}(window));</script><script type="application/javascript">
+if ((window.PyViz === undefined) || (window.PyViz instanceof HTMLElement)) {
+  window.PyViz = {comms: {}, comm_status:{}, kernels:{}, receivers: {}, plot_index: []}
+}
+
+
+    function JupyterCommManager() {
+    }
+
+    JupyterCommManager.prototype.register_target = function(plot_id, comm_id, msg_handler) {
+      if (window.comm_manager || ((window.Jupyter !== undefined) && (Jupyter.notebook.kernel != null))) {
+        var comm_manager = window.comm_manager || Jupyter.notebook.kernel.comm_manager;
+        comm_manager.register_target(comm_id, function(comm) {
+          comm.on_msg(msg_handler);
+        });
+      } else if ((plot_id in window.PyViz.kernels) && (window.PyViz.kernels[plot_id])) {
+        window.PyViz.kernels[plot_id].registerCommTarget(comm_id, function(comm) {
+          comm.onMsg = msg_handler;
+        });
+      } else if (typeof google != 'undefined' && google.colab.kernel != null) {
+        google.colab.kernel.comms.registerTarget(comm_id, (comm) => {
+          var messages = comm.messages[Symbol.asyncIterator]();
+          function processIteratorResult(result) {
+            var message = result.value;
+            var content = {data: message.data, comm_id};
+            var buffers = []
+            for (var buffer of message.buffers || []) {
+              buffers.push(new DataView(buffer))
+            }
+            var metadata = message.metadata || {};
+            var msg = {content, buffers, metadata}
+            msg_handler(msg);
+            return messages.next().then(processIteratorResult);
+          }
+          return messages.next().then(processIteratorResult);
+        })
+      }
+    }
+
+    JupyterCommManager.prototype.get_client_comm = function(plot_id, comm_id, msg_handler) {
+      if (comm_id in window.PyViz.comms) {
+        return window.PyViz.comms[comm_id];
+      } else if (window.comm_manager || ((window.Jupyter !== undefined) && (Jupyter.notebook.kernel != null))) {
+        var comm_manager = window.comm_manager || Jupyter.notebook.kernel.comm_manager;
+        var comm = comm_manager.new_comm(comm_id, {}, {}, {}, comm_id);
+        if (msg_handler) {
+          comm.on_msg(msg_handler);
+        }
+      } else if ((plot_id in window.PyViz.kernels) && (window.PyViz.kernels[plot_id])) {
+        var comm = window.PyViz.kernels[plot_id].connectToComm(comm_id);
+        let retries = 0;
+        const open = () => {
+          if (comm.active) {
+            comm.open();
+          } else if (retries > 3) {
+            console.warn('Comm target never activated')
+          } else {
+            retries += 1
+            setTimeout(open, 500)
+          }
+        }
+        if (comm.active) {
+          comm.open();
+        } else {
+          setTimeout(open, 500)
+        }
+        if (msg_handler) {
+          comm.onMsg = msg_handler;
+        }
+      } else if (typeof google != 'undefined' && google.colab.kernel != null) {
+        var comm_promise = google.colab.kernel.comms.open(comm_id)
+        comm_promise.then((comm) => {
+          window.PyViz.comms[comm_id] = comm;
+          if (msg_handler) {
+            var messages = comm.messages[Symbol.asyncIterator]();
+            function processIteratorResult(result) {
+              var message = result.value;
+              var content = {data: message.data};
+              var metadata = message.metadata || {comm_id};
+              var msg = {content, metadata}
+              msg_handler(msg);
+              return messages.next().then(processIteratorResult);
+            }
+            return messages.next().then(processIteratorResult);
+          }
+        })
+        var sendClosure = (data, metadata, buffers, disposeOnDone) => {
+          return comm_promise.then((comm) => {
+            comm.send(data, metadata, buffers, disposeOnDone);
+          });
+        };
+        var comm = {
+          send: sendClosure
+        };
+      }
+      window.PyViz.comms[comm_id] = comm;
+      return comm;
+    }
+    window.PyViz.comm_manager = new JupyterCommManager();
+    
+
+
+var JS_MIME_TYPE = 'application/javascript';
+var HTML_MIME_TYPE = 'text/html';
+var EXEC_MIME_TYPE = 'application/vnd.holoviews_exec.v0+json';
+var CLASS_NAME = 'output';
+
+/**
+ * Render data to the DOM node
+ */
+function render(props, node) {
+  var div = document.createElement("div");
+  var script = document.createElement("script");
+  node.appendChild(div);
+  node.appendChild(script);
+}
+
+/**
+ * Handle when a new output is added
+ */
+function handle_add_output(event, handle) {
+  var output_area = handle.output_area;
+  var output = handle.output;
+  if ((output.data == undefined) || (!output.data.hasOwnProperty(EXEC_MIME_TYPE))) {
+    return
+  }
+  var id = output.metadata[EXEC_MIME_TYPE]["id"];
+  var toinsert = output_area.element.find("." + CLASS_NAME.split(' ')[0]);
+  if (id !== undefined) {
+    var nchildren = toinsert.length;
+    var html_node = toinsert[nchildren-1].children[0];
+    html_node.innerHTML = output.data[HTML_MIME_TYPE];
+    var scripts = [];
+    var nodelist = html_node.querySelectorAll("script");
+    for (var i in nodelist) {
+      if (nodelist.hasOwnProperty(i)) {
+        scripts.push(nodelist[i])
+      }
+    }
+
+    scripts.forEach( function (oldScript) {
+      var newScript = document.createElement("script");
+      var attrs = [];
+      var nodemap = oldScript.attributes;
+      for (var j in nodemap) {
+        if (nodemap.hasOwnProperty(j)) {
+          attrs.push(nodemap[j])
+        }
+      }
+      attrs.forEach(function(attr) { newScript.setAttribute(attr.name, attr.value) });
+      newScript.appendChild(document.createTextNode(oldScript.innerHTML));
+      oldScript.parentNode.replaceChild(newScript, oldScript);
+    });
+    if (JS_MIME_TYPE in output.data) {
+      toinsert[nchildren-1].children[1].textContent = output.data[JS_MIME_TYPE];
+    }
+    output_area._hv_plot_id = id;
+    if ((window.Bokeh !== undefined) && (id in Bokeh.index)) {
+      window.PyViz.plot_index[id] = Bokeh.index[id];
+    } else {
+      window.PyViz.plot_index[id] = null;
+    }
+  } else if (output.metadata[EXEC_MIME_TYPE]["server_id"] !== undefined) {
+    var bk_div = document.createElement("div");
+    bk_div.innerHTML = output.data[HTML_MIME_TYPE];
+    var script_attrs = bk_div.children[0].attributes;
+    for (var i = 0; i < script_attrs.length; i++) {
+      toinsert[toinsert.length - 1].childNodes[1].setAttribute(script_attrs[i].name, script_attrs[i].value);
+    }
+    // store reference to server id on output_area
+    output_area._bokeh_server_id = output.metadata[EXEC_MIME_TYPE]["server_id"];
+  }
+}
+
+/**
+ * Handle when an output is cleared or removed
+ */
+function handle_clear_output(event, handle) {
+  var id = handle.cell.output_area._hv_plot_id;
+  var server_id = handle.cell.output_area._bokeh_server_id;
+  if (((id === undefined) || !(id in PyViz.plot_index)) && (server_id !== undefined)) { return; }
+  var comm = window.PyViz.comm_manager.get_client_comm("hv-extension-comm", "hv-extension-comm", function () {});
+  if (server_id !== null) {
+    comm.send({event_type: 'server_delete', 'id': server_id});
+    return;
+  } else if (comm !== null) {
+    comm.send({event_type: 'delete', 'id': id});
+  }
+  delete PyViz.plot_index[id];
+  if ((window.Bokeh !== undefined) & (id in window.Bokeh.index)) {
+    var doc = window.Bokeh.index[id].model.document
+    doc.clear();
+    const i = window.Bokeh.documents.indexOf(doc);
+    if (i > -1) {
+      window.Bokeh.documents.splice(i, 1);
+    }
+  }
+}
+
+/**
+ * Handle kernel restart event
+ */
+function handle_kernel_cleanup(event, handle) {
+  delete PyViz.comms["hv-extension-comm"];
+  window.PyViz.plot_index = {}
+}
+
+/**
+ * Handle update_display_data messages
+ */
+function handle_update_output(event, handle) {
+  handle_clear_output(event, {cell: {output_area: handle.output_area}})
+  handle_add_output(event, handle)
+}
+
+function register_renderer(events, OutputArea) {
+  function append_mime(data, metadata, element) {
+    // create a DOM node to render to
+    var toinsert = this.create_output_subarea(
+    metadata,
+    CLASS_NAME,
+    EXEC_MIME_TYPE
+    );
+    this.keyboard_manager.register_events(toinsert);
+    // Render to node
+    var props = {data: data, metadata: metadata[EXEC_MIME_TYPE]};
+    render(props, toinsert[0]);
+    element.append(toinsert);
+    return toinsert
+  }
+
+  events.on('output_added.OutputArea', handle_add_output);
+  events.on('output_updated.OutputArea', handle_update_output);
+  events.on('clear_output.CodeCell', handle_clear_output);
+  events.on('delete.Cell', handle_clear_output);
+  events.on('kernel_ready.Kernel', handle_kernel_cleanup);
+
+  OutputArea.prototype.register_mime_type(EXEC_MIME_TYPE, append_mime, {
+    safe: true,
+    index: 0
+  });
+}
+
+if (window.Jupyter !== undefined) {
+  try {
+    var events = require('base/js/events');
+    var OutputArea = require('notebook/js/outputarea').OutputArea;
+    if (OutputArea.prototype.mime_types().indexOf(EXEC_MIME_TYPE) == -1) {
+      register_renderer(events, OutputArea);
+    }
+  } catch(err) {
+  }
+}
+</script><div class="output text_html"><img src='data:image/png;base64,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' style='max-width:100%; margin: auto; display: block; '/></div></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>For more on stacked bars, see the <a class="reference internal" href="../../ref/api/manual/hvplot.hvPlot.bar.html"><span class="std std-doc">Bar Plots documentation</span></a>.</p>
+</div>
+</section>
+
+<div id="scroller-right">
+    This web page was generated from a Jupyter notebook and not all
+    interactivity will work on this website.
+</div>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="horizontal_bar.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Horizontal Bar Chart</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="category_heatmap.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Category Heatmap</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+
+  
+  <div class="tocsection editthispage">
+    <a href="https://github.com/holoviz/hvplot/edit/main/doc/gallery/categorical/stacked_bar.ipynb">
+      <i class="fa-solid fa-pencil"></i>
+      
+      
+        
+          Edit on GitHub
+        
+      
+    </a>
+  </div>
+</div>
+
+  <div class="sidebar-secondary-item">
+
+
+  <div class="tocsection sourcelink">
+    <a href="../../_sources/gallery/categorical/stacked_bar.ipynb">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item"><p class="nbsite-copyright-last-updated">
+    <span class="copyright">
+            &copy; Copyright 2016-2025 Holoviz contributors.
+    </span>
+    <span class="last-updated">Last updated on 2025-07-16.</span><br>
+</p></div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
